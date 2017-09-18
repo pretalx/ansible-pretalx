@@ -1,0 +1,10 @@
+---
+pretalx_database_backend: postgresql
+pretalx_database_name: pretalx
+pretalx_database_user: pretalx
+pretalx_database_password: false
+pretalx_database_host: localhost
+pretalx_database_port: 5432
+
+pretalx_staticfiles_directory: /usr/share/webapps/pretalx/
+pretalx_webserver_group: http

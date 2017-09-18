@@ -23,7 +23,7 @@
     name: git+https://github.com/pretalx/pretalx#subdirectory=src/&egg=pretalx
     executable: pip3
     extra_args: --user
-    state: forcereinstall  # TODO: move to 'latest' or fixed version once pretalx has versioning
+    state: latest  # TODO: move to 'latest' or fixed version once pretalx has versioning
   become_user: pretalx
   notify:
     - Restart pretalx service
@@ -39,6 +39,10 @@
   become_user: pretalx
   notify:
     - Restart pretalx service
+    - Run pretalx migrations
+    - Collect static pretalx files
+    - Compress static pretalx files
+    - Compile pretalx messages
 
 - name: Install systemd socket
   copy:

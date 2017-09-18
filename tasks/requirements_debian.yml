@@ -1,0 +1,22 @@
+---
+- name: Add unstable package sources
+  apt_repository:
+    repo: deb http://ftp.de.debian.org/debian unstable main
+    state: present
+
+- name: Install Python 3.6
+  apt:
+    name: "{{ item }}"
+    state: latest
+    default_release: unstable
+  with_items:
+    - python3.6
+    - python3-pip
+
+- name: Install other dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - git
+    - sqlite3

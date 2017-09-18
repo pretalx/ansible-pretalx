@@ -1,0 +1,13 @@
+[django]
+debug = False
+static = /usr/share/webapps/pretalx/
+static = {{ pretalx_staticfiles_directory }}
+
+
+[database]
+backend = {{ pretalx_database_backend }}
+name = {{ pretalx_database_name }}
+user = {{ pretalx_database_user }}
+password = {{ pretalx_database_password }}
+host = {{ pretalx_database_host }}
+port = {{ pretalx_database_port }}
