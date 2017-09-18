@@ -4,6 +4,11 @@
     name: pretalx
     state: restarted
 
+- name: Restart pretalx socket
+  service:
+    name: pretalx.socket
+    state: restarted
+
 - name: Run pretalx migrations
   command: python -m pretalx collectstatic --noinput
   become_user: pretalx

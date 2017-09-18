@@ -40,12 +40,25 @@
   notify:
     - Restart pretalx service
 
+- name: Install systemd socket
+  copy:
+    src: pretalx.socket
+    dest: /etc/systemd/system/pretalx.socket
+  notify:
+    - Restart pretalx socket
+
 - name: Install systemd service
   copy:
     src: pretalx.service
     dest: /etc/systemd/system/pretalx.service
   notify:
     - Restart pretalx service
+
+- name: Start pretalx socket
+  service:
+    name: pretalx.socket
+    state: started
+    enabled: true
 
 - name: Start systemd service
   service:
