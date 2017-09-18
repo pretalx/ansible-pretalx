@@ -1,0 +1,21 @@
+---
+- name: Restart pretalx service
+  service:
+    name: pretalx
+    state: restarted
+
+- name: Run pretalx migrations
+  command: python -m pretalx collectstatic --noinput
+  become_user: pretalx
+
+- name: Collect static pretalx files
+  command: python -m pretalx collectstatic --noinput
+  become_user: pretalx
+
+- name: Compress static pretalx files
+  command: python -m pretalx compress
+  become_user: pretalx
+
+- name: Compile pretalx messages
+  command: python -m pretalx compilemessages
+  become_user: pretalx

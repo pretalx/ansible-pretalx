@@ -1,0 +1,54 @@
+---
+- name: Create a pretalx user
+  user:
+    name: pretalx
+    state: present
+
+- name: Install pretalx dependencies
+  pip:
+    name: "{{ item }}"
+    executable: pip3
+    extra_args: --user
+    state: latest
+  with_items:
+    - git+https://github.com/GabrielUlici/django-bootstrap4.git#egg=django-bootstrap4
+    - gunicorn
+    - pip
+    - setuptools
+    - wheel
+  become_user: pretalx
+
+- name: Install pretalx
+  pip:
+    name: git+https://github.com/pretalx/pretalx#subdirectory=src/&egg=pretalx
+    executable: pip3
+    extra_args: --user
+    state: forcereinstall  # TODO: move to 'latest' or fixed version once pretalx has versioning
+  become_user: pretalx
+  notify:
+    - Restart pretalx service
+    - Run pretalx migrations
+    - Collect static pretalx files
+    - Compress static pretalx files
+    - Compile pretalx messages
+
+- name: Configure pretalx
+  template:
+    src: pretalx.cfg.j2
+    dest: ~/.pretalx.cfg
+  become_user: pretalx
+  notify:
+    - Restart pretalx service
+
+- name: Install systemd service
+  copy:
+    src: pretalx.service
+    dest: /etc/systemd/system/pretalx.service
+  notify:
+    - Restart pretalx service
+
+- name: Start systemd service
+  service:
+    name: pretalx
+    state: started
+    enabled: true

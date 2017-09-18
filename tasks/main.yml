@@ -1,0 +1,3 @@
+---
+- include: requirements.yml
+- include: package.yml
