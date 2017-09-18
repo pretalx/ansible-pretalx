@@ -6,5 +6,7 @@ pretalx_database_password: false
 pretalx_database_host: localhost
 pretalx_database_port: 5432
 
-pretalx_staticfiles_directory: /usr/share/webapps/pretalx/
+pretalx_staticfiles_directory: /usr/share/webapps/pretalx/static/
+pretalx_data_dir: /usr/share/webapps/pretalx/data/
 pretalx_webserver_group: http
+pretalx_url: http://localhost
