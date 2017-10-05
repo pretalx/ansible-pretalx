@@ -8,5 +8,6 @@ pretalx_database_port: 5432
 
 pretalx_staticfiles_directory: /usr/share/webapps/pretalx/static/
 pretalx_data_dir: /usr/share/webapps/pretalx/data/
+pretalx_media_dir: /usr/share/webapps/pretalx/media/
 pretalx_webserver_group: http
 pretalx_url: http://localhost

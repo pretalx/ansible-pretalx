@@ -1,7 +1,7 @@
-[django]
-debug = False
+[filesystem]
 static = {{ pretalx_staticfiles_directory }}
-data_dir = {{ pretalx_data_dir }}
+media = {{ pretalx_media_dir }}
+data = {{ pretalx_data_dir }}
 
 [database]
 backend = {{ pretalx_database_backend }}
