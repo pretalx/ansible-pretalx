@@ -10,7 +10,7 @@
     state: restarted
 
 - name: Run pretalx migrations
-  command: python -m pretalx collectstatic --noinput
+  command: python -m pretalx migrate
   become_user: pretalx
 
 - name: Collect static pretalx files
