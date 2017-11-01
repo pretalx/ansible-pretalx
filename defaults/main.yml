@@ -11,3 +11,5 @@ pretalx_data_dir: /usr/share/webapps/pretalx/data/
 pretalx_media_dir: /usr/share/webapps/pretalx/media/
 pretalx_webserver_group: http
 pretalx_url: http://localhost
+
+pretalx_version: latest

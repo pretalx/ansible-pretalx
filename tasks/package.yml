@@ -21,12 +21,12 @@
   tags:
     - pretalx
 
-- name: Install pretalx
+- name: Install pretalx (latest)
   pip:
-    name: git+https://github.com/pretalx/pretalx#subdirectory=src/&egg=pretalx
+    name: pretalx
     executable: pip3
     extra_args: --user
-    state: latest  # TODO: move to 'latest' or fixed version once pretalx has versioning
+    state: latest
   become_user: pretalx
   notify:
     - Restart pretalx service
@@ -36,6 +36,24 @@
     - Compile pretalx messages
   tags:
     - pretalx
+  when: (pretalx_version == 'latest')
+
+- name: Install pretalx (versioned)
+  pip:
+    name: pretalx
+    executable: pip3
+    extra_args: --user
+    version: "{pretalx_version}"
+  become_user: pretalx
+  notify:
+    - Restart pretalx service
+    - Run pretalx migrations
+    - Collect static pretalx files
+    - Compress static pretalx files
+    - Compile pretalx messages
+  tags:
+    - pretalx
+  when: (pretalx_version != 'latest')
 
 - name: Configure pretalx
   template:
