@@ -5,6 +5,8 @@
     state: latest
   with_items:
     - python
+  tags:
+    - pretalx
 
 - name: Install other dependencies
   pacman:
@@ -13,3 +15,5 @@
   with_items:
     - git
     - sqlite
+  tags:
+    - pretalx

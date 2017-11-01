@@ -3,6 +3,8 @@
   apt_repository:
     repo: deb http://ftp.de.debian.org/debian unstable main
     state: present
+  tags:
+    - pretalx
 
 - name: Install Python 3.6
   apt:
@@ -12,6 +14,8 @@
   with_items:
     - python3.6
     - python3-pip
+  tags:
+    - pretalx
 
 - name: Install other dependencies
   apt:
@@ -20,3 +24,5 @@
   with_items:
     - git
     - sqlite3
+  tags:
+    - pretalx

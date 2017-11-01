@@ -3,6 +3,8 @@
   user:
     name: pretalx
     state: present
+  tags:
+    - pretalx
 
 - name: Install pretalx dependencies
   pip:
@@ -16,6 +18,8 @@
     - setuptools
     - wheel
   become_user: pretalx
+  tags:
+    - pretalx
 
 - name: Install pretalx
   pip:
@@ -30,6 +34,8 @@
     - Collect static pretalx files
     - Compress static pretalx files
     - Compile pretalx messages
+  tags:
+    - pretalx
 
 - name: Configure pretalx
   template:
@@ -42,6 +48,8 @@
     - Collect static pretalx files
     - Compress static pretalx files
     - Compile pretalx messages
+  tags:
+    - pretalx
 
 - name: Install systemd socket
   copy:
@@ -49,6 +57,8 @@
     dest: /etc/systemd/system/pretalx.socket
   notify:
     - Restart pretalx socket
+  tags:
+    - pretalx
 
 - name: Install systemd service
   copy:
@@ -56,15 +66,21 @@
     dest: /etc/systemd/system/pretalx.service
   notify:
     - Restart pretalx service
+  tags:
+    - pretalx
 
 - name: Start pretalx socket
   service:
     name: pretalx.socket
     state: started
     enabled: true
+  tags:
+    - pretalx
 
 - name: Start systemd service
   service:
     name: pretalx
     state: started
     enabled: true
+  tags:
+    - pretalx
