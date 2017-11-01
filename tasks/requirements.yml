@@ -1,2 +1,2 @@
 ---
-- include: "requirements_{{ ansible_os_family|lower }}.yml"
+- include_tasks: requirements_{{ ansible_os_family|lower }}.yml
