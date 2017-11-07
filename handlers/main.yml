@@ -9,7 +9,7 @@
 
 - name: Restart pretalx socket
   service:
-    name: pretalx_{{ pretalx_instance_identifier }}.socket
+    name: pretalx@{{ pretalx_instance_identifier }}.socket
     state: restarted
 
 - name: Run pretalx migrations

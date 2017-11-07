@@ -64,8 +64,8 @@
 
 - name: Install systemd socket
   template:
-    src: pretalx.socket
-    dest: /etc/systemd/system/pretalx_{{ pretalx_instance_identifier }}.socket
+    src: pretalx@.socket
+    dest: /etc/systemd/system/pretalx@.socket
   notify:
     - Reload systemd services
     - Restart pretalx socket
@@ -77,13 +77,14 @@
     src: pretalx.service.j2
     dest: /etc/systemd/system/pretalx@.service
   notify:
+    - Reload systemd services
     - Restart pretalx service
   tags:
     - pretalx
 
 - name: Start pretalx socket
   service:
-    name: pretalx{{ pretalx_instance_identifier }}.socket
+    name: pretalx@{{ pretalx_instance_identifier }}.socket
     state: started
     enabled: true
   tags:
