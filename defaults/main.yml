@@ -24,7 +24,7 @@ pretalx_mail_password: password
 pretalx_mail_tls: "False"
 pretalx_mail_ssl: "True"
 
-pretalx_celery_backend: "redis://127.0.0.1/1"
-pretalx_celery_broker: "redis://127.0.0.1/2"
+pretalx_celery_backend: "redis://127.0.0.1:6379/1"
+pretalx_celery_broker: "redis://127.0.0.1:6379/2"
 
 pretalx_version: latest

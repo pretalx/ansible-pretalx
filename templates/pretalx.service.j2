@@ -1,11 +1,11 @@
 [Unit]
 Description=pretalx %I server application
-Requires=pretalx_%i.socket
+Requires=pretalx@%i.socket
 After=network.target
 
 [Service]
 User=pretalx_%i
-WorkingDirectoy=~pretalx_%i/.local/lib/python{{ pretalx_system_python_version }}/site-packages/pretalx
-ExecStart=~pretalx_%i/.local/bin/gunicorn --bind unix:/run/gunicorn/pretalx_%i pretalx.wsgi
+WorkingDirectory=/home/pretalx_%i/.local/lib/python{{ pretalx_system_python_version }}/site-packages/pretalx
+ExecStart=/home/pretalx_%i/.local/bin/gunicorn --bind unix:/run/gunicorn/pretalx_%i pretalx.wsgi
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
