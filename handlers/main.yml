@@ -1,4 +1,7 @@
 ---
+- name: Reload systemd services
+  daemon_reload: yes
+
 - name: Restart pretalx service
   service:
     name: pretalx@{{ pretalx_instance_identifier }}

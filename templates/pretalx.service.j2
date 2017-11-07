@@ -4,7 +4,7 @@ Requires=pretalx_%i.socket
 After=network.target
 
 [Service]
-User=%i
+User=pretalx_%i
 WorkingDirectoy=~pretalx_%i/.local/lib/python{{ pretalx_system_python_version }}/site-packages/pretalx
 ExecStart=~pretalx_%i/.local/bin/gunicorn --bind unix:/run/gunicorn/pretalx_%i pretalx.wsgi
 ExecReload=/bin/kill -s HUP $MAINPID
