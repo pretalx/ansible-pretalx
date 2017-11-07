@@ -13,3 +13,16 @@ port = {{ pretalx_database_port }}
 
 [site]
 url = {{ pretalx_url }}
+
+[mail]
+from = {{ pretalx_mail_from }}
+host = {{ pretalx_mail_host }}
+port = {{ pretalx_mail_port }}
+user = {{ pretalx_mail_user }}
+password = {{ pretalx_mail_password }}
+tls = {{ pretalx_mail_tls }}
+ssl = {{ pretalx_mail_ssl }}
+
+[celery]
+backend = {{ pretalx_celery_backend }}
+broker = {{ pretalx_celery_backend }}

@@ -16,4 +16,15 @@ pretalx_media_dir: /usr/share/webapps/pretalx/media/
 pretalx_webserver_group: http
 pretalx_url: http://localhost
 
+pretalx_mail_from: admin@localhost
+pretalx_mail_host: localhost
+pretalx_mail_port: 25
+pretalx_mail_user: admin
+pretalx_mail_password: password
+pretalx_mail_tls: "False"
+pretalx_mail_ssl: "True"
+
+pretalx_celery_backend: "redis://127.0.0.1/1"
+pretalx_celery_broker: "redis://127.0.0.1/2"
+
 pretalx_version: latest
