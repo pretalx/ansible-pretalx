@@ -1,4 +1,11 @@
 ---
+pretalx_system_user: pretalx
+pretalx_system_group: pretalx
+pretalx_system_home: /home/{{ pretalx_system_user }}
+pretalx_system_python_version: "3.6"
+
+pretalx_instance_identifier: ""  # used if you have more than one instance on your server
+
 pretalx_database_backend: postgresql
 pretalx_database_name: pretalx
 pretalx_database_user: pretalx

@@ -1,0 +1,12 @@
+[Unit]
+Description=pretalx{{ pretalx_instance_identifier }} server application
+Requires=pretalx{{ pretalx_instance_identifier }}.socket
+After=network.target
+
+[Service]
+User={{ pretalx_system_user }}
+Group={{ pretalx_system_group }}
+WorkingDirectoy={{ pretalx_system_home }}/.local/lib/python{{ pretalx_system_python_version }}/site-packages/pretalx
+ExecStart={{ pretalx_system_home }}/.local/bin/gunicorn --bind unix:/run/gunicorn/pretalx{{ pretalx_instance_identifier }} pretalx.wsgi
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID

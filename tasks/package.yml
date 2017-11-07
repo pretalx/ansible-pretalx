@@ -1,7 +1,7 @@
 ---
 - name: Create a pretalx user
   user:
-    name: pretalx
+    name: "{{ pretalx_system_user }}"
     state: present
   tags:
     - pretalx
@@ -17,7 +17,7 @@
     - pip
     - setuptools
     - wheel
-  become_user: pretalx
+  become_user: "{{ pretalx_system_user }}"
   tags:
     - pretalx
 
@@ -27,7 +27,7 @@
     executable: pip3
     extra_args: --user
     state: latest
-  become_user: pretalx
+  become_user: "{{ pretalx_system_user }}"
   notify:
     - Restart pretalx service
     - Run pretalx migrations
@@ -43,8 +43,8 @@
     name: pretalx
     executable: pip3
     extra_args: --user
-    version: "{pretalx_version}"
-  become_user: pretalx
+    version: "{{ pretalx_version }}"
+  become_user: "{{ pretalx_system_user }}"
   notify:
     - Restart pretalx service
     - Run pretalx migrations
@@ -59,7 +59,7 @@
   template:
     src: pretalx.cfg.j2
     dest: ~/.pretalx.cfg
-  become_user: pretalx
+  become_user: "{{ pretalx_system_user }}"
   notify:
     - Restart pretalx service
     - Run pretalx migrations
@@ -70,18 +70,18 @@
     - pretalx
 
 - name: Install systemd socket
-  copy:
+  template:
     src: pretalx.socket
-    dest: /etc/systemd/system/pretalx.socket
+    dest: /etc/systemd/system/pretalx{{ pretalx_instance_identifier }}.socket
   notify:
     - Restart pretalx socket
   tags:
     - pretalx
 
 - name: Install systemd service
-  copy:
-    src: pretalx.service
-    dest: /etc/systemd/system/pretalx.service
+  template:
+    src: pretalx.service.j2
+    dest: /etc/systemd/system/pretalx{{ pretalx_instance_identifier }}.service
   notify:
     - Restart pretalx service
   tags:
@@ -89,7 +89,7 @@
 
 - name: Start pretalx socket
   service:
-    name: pretalx.socket
+    name: pretalx.socket.j2
     state: started
     enabled: true
   tags:
@@ -97,7 +97,7 @@
 
 - name: Start systemd service
   service:
-    name: pretalx
+    name: pretalx{{ pretalx_instance_identifier }}
     state: started
     enabled: true
   tags:
