@@ -1,26 +1,26 @@
 ---
 - name: Restart pretalx service
   service:
-    name: pretalx
+    name: pretalx@{{ pretalx_instance_identifier }}
     state: restarted
 
 - name: Restart pretalx socket
   service:
-    name: pretalx.socket
+    name: pretalx_{{ pretalx_instance_identifier }}.socket
     state: restarted
 
 - name: Run pretalx migrations
   command: python -m pretalx migrate
-  become_user: pretalx
+  become_user: "{{ pretalx_system_user }}"
 
 - name: Collect static pretalx files
   command: python -m pretalx collectstatic --noinput
-  become_user: pretalx
+  become_user: "{{ pretalx_system_user }}"
 
 - name: Compress static pretalx files
   command: python -m pretalx compress
-  become_user: pretalx
+  become_user: "{{ pretalx_system_user }}"
 
 - name: Compile pretalx messages
   command: python -m pretalx compilemessages
-  become_user: pretalx
+  become_user: "{{ pretalx_system_user }}"
