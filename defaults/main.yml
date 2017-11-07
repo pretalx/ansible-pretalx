@@ -1,5 +1,5 @@
 ---
-pretalx_instance_identifier: ""  # used if you have more than one instance on your server
+pretalx_instance_identifier: "event"  # used if you have more than one instance on your server
 
 pretalx_system_python_version: "3.6"
 
