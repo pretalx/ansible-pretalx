@@ -1,10 +1,21 @@
 ---
 - name: Reload systemd services
-  daemon_reload: yes
+  systemd:
+    daemon_reload: yes
+
+- name: Restart redis
+  service:
+    name: redis
+    state: restarted
 
 - name: Restart pretalx service
   service:
     name: pretalx@{{ pretalx_instance_identifier }}
+    state: restarted
+
+- name: Restart worker service
+  service:
+    name: pretalx-worker@{{ pretalx_instance_identifier }}
     state: restarted
 
 - name: Restart pretalx socket

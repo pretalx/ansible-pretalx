@@ -6,65 +6,83 @@
   tags:
     - pretalx
 
-- name: Do things as pretalx user
-  tasks:
-  - name: Install pretalx dependencies
-    pip:
-      name: "{{ item }}"
-      executable: pip3
-      extra_args: --user
-      state: latest
-    with_items:
-      - gunicorn
-      - pip
-      - setuptools
-      - wheel
+- name: Create required directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ pretalx_system_user }}"
+    recurse: yes
+  with_items:
+    - "{{ pretalx_staticfiles_directory }}"
+    - "{{ pretalx_data_dir }}"
+    - "{{ pretalx_media_dir }}"
 
-  - name: Install pretalx (latest)
-    pip:
-      name: pretalx
-      executable: pip3
-      extra_args: --user
-      state: latest
-    notify:
-      - Restart pretalx service
-      - Run pretalx migrations
-      - Collect static pretalx files
-      - Compress static pretalx files
-      - Compile pretalx messages
-    when: (pretalx_version == 'latest')
+- name: Install pretalx dependencies
+  pip:
+    name: "{{ item }}"
+    executable: pip3
+    extra_args: --user
+    state: latest
+  with_items:
+    - gunicorn
+    - pip
+    - setuptools
+    - wheel
+  become_user: "{{ pretalx_system_user }}"
+  tags:
+    - pretalx
 
-  - name: Install pretalx (versioned)
-    pip:
-      name: pretalx
-      executable: pip3
-      extra_args: --user
-      version: "{{ pretalx_version }}"
-    notify:
-      - Restart pretalx service
-      - Run pretalx migrations
-      - Collect static pretalx files
-      - Compress static pretalx files
-      - Compile pretalx messages
-    when: (pretalx_version != 'latest')
+- name: Install pretalx (latest)
+  pip:
+    name: pretalx
+    executable: pip3
+    extra_args: --user
+    state: latest
+  notify:
+    - Restart pretalx service
+    - Run pretalx migrations
+    - Collect static pretalx files
+    - Compress static pretalx files
+    - Compile pretalx messages
+  when: (pretalx_version == 'latest')
+  become_user: "{{ pretalx_system_user }}"
+  tags:
+    - pretalx
 
-  - name: Configure pretalx
-    template:
-      src: pretalx.cfg.j2
-      dest: ~/.pretalx.cfg
-    notify:
-      - Restart pretalx service
-      - Run pretalx migrations
-      - Collect static pretalx files
-      - Compress static pretalx files
-      - Compile pretalx messages
+- name: Install pretalx (versioned)
+  pip:
+    name: pretalx
+    executable: pip3
+    extra_args: --user
+    version: "{{ pretalx_version }}"
+  notify:
+    - Restart pretalx service
+    - Run pretalx migrations
+    - Collect static pretalx files
+    - Compress static pretalx files
+    - Compile pretalx messages
+  when: (pretalx_version != 'latest')
+  become_user: "{{ pretalx_system_user }}"
+  tags:
+    - pretalx
+
+- name: Configure pretalx
+  template:
+    src: pretalx.cfg.j2
+    dest: ~/.pretalx.cfg
+  notify:
+    - Restart pretalx service
+    - Run pretalx migrations
+    - Collect static pretalx files
+    - Compress static pretalx files
+    - Compile pretalx messages
   become_user: "{{ pretalx_system_user }}"
   tags:
     - pretalx
 
 - name: Install systemd socket
   template:
-    src: pretalx@.socket
+    src: pretalx.socket.j2
     dest: /etc/systemd/system/pretalx@.socket
   notify:
     - Reload systemd services
@@ -82,6 +100,16 @@
   tags:
     - pretalx
 
+- name: Install worker service
+  template:
+    src: pretalx-worker.service.j2
+    dest: /etc/systemd/system/pretalx-worker@.service
+  notify:
+    - Reload systemd services
+    - Restart worker service
+  tags:
+    - pretalx
+
 - name: Start pretalx socket
   service:
     name: pretalx@{{ pretalx_instance_identifier }}.socket
@@ -93,6 +121,14 @@
 - name: Start systemd service
   service:
     name: pretalx@{{ pretalx_instance_identifier }}
+    state: started
+    enabled: true
+  tags:
+    - pretalx
+
+- name: Start worker service
+  service:
+    name: pretalx-worker@{{ pretalx_instance_identifier }}
     state: started
     enabled: true
   tags:

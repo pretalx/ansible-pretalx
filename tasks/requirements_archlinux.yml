@@ -15,5 +15,17 @@
   with_items:
     - git
     - sqlite
+    - redis
+  tags:
+    - pretalx
+  notify:
+    - Reload systemd services
+    - Restart redis
+
+- name: Start and enable redis
+  service:
+    name: redis
+    state: started
+    enabled: true
   tags:
     - pretalx
