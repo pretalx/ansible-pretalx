@@ -26,6 +26,7 @@
   with_items:
     - gunicorn
     - pip
+    - redis
     - setuptools
     - wheel
   become_user: "{{ pretalx_system_user }}"
@@ -44,7 +45,7 @@
     - Collect static pretalx files
     - Compress static pretalx files
     - Compile pretalx messages
-  when: (pretalx_version == 'latest')
+  when: (pretalx_version == 'latest') and not (pretalx_git_version)
   become_user: "{{ pretalx_system_user }}"
   tags:
     - pretalx
@@ -61,7 +62,24 @@
     - Collect static pretalx files
     - Compress static pretalx files
     - Compile pretalx messages
-  when: (pretalx_version != 'latest')
+  when: (pretalx_version != 'latest') and not pretalx_git_version
+  become_user: "{{ pretalx_system_user }}"
+  tags:
+    - pretalx
+
+- name: Install pretalx (git)
+  pip:
+    name: git+git://github.com/pretalx/pretalx.git@{{ pretalx_git_version }}#egg=pretalx&subdirectory=src
+    executable: pip3
+    extra_args: --user
+    state: forcereinstall
+  notify:
+    - Restart pretalx service
+    - Run pretalx migrations
+    - Collect static pretalx files
+    - Compress static pretalx files
+    - Compile pretalx messages
+  when: (pretalx_git_version != "")
   become_user: "{{ pretalx_system_user }}"
   tags:
     - pretalx
