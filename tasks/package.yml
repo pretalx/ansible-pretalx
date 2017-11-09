@@ -29,6 +29,7 @@
     - redis
     - setuptools
     - wheel
+  become: true
   become_user: "{{ pretalx_system_user }}"
   tags:
     - pretalx
@@ -46,6 +47,7 @@
     - Compress static pretalx files
     - Compile pretalx messages
   when: (pretalx_version == 'latest') and not (pretalx_git_version)
+  become: true
   become_user: "{{ pretalx_system_user }}"
   tags:
     - pretalx
@@ -63,6 +65,7 @@
     - Compress static pretalx files
     - Compile pretalx messages
   when: (pretalx_version != 'latest') and not pretalx_git_version
+  become: true
   become_user: "{{ pretalx_system_user }}"
   tags:
     - pretalx
@@ -80,6 +83,7 @@
     - Compress static pretalx files
     - Compile pretalx messages
   when: (pretalx_git_version != "")
+  become: true
   become_user: "{{ pretalx_system_user }}"
   tags:
     - pretalx
@@ -94,6 +98,7 @@
     - Collect static pretalx files
     - Compress static pretalx files
     - Compile pretalx messages
+  become: true
   become_user: "{{ pretalx_system_user }}"
   tags:
     - pretalx

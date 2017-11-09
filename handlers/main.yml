@@ -25,16 +25,20 @@
 
 - name: Run pretalx migrations
   command: python -m pretalx migrate
+  become: true
   become_user: "{{ pretalx_system_user }}"
 
 - name: Collect static pretalx files
   command: python -m pretalx collectstatic --noinput
+  become: true
   become_user: "{{ pretalx_system_user }}"
 
 - name: Compress static pretalx files
   command: python -m pretalx compress
+  become: true
   become_user: "{{ pretalx_system_user }}"
 
 - name: Compile pretalx messages
   command: python -m pretalx compilemessages
+  become: true
   become_user: "{{ pretalx_system_user }}"
