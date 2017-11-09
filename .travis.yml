@@ -4,4 +4,4 @@ language: python
 python: "2.7"
 install:
   - pip install ansible-lint
-script: ansible-lint .
+script: ansible-lint -x ANSIBLE0010 .
