@@ -77,7 +77,7 @@
     name: git+git://github.com/pretalx/pretalx.git@{{ pretalx_git_version }}#egg=pretalx&subdirectory=src
     executable: pip3
     extra_args: --user
-    state: forcereinstall
+    state: latest
   notify:
     - Restart pretalx service
     - Run pretalx migrations
@@ -87,6 +87,7 @@
   when: (pretalx_git_version != "")
   become: true
   become_user: "{{ pretalx_system_user }}"
+  changed_when: true
   tags:
     - pretalx
     - pretalx-update
