@@ -51,6 +51,7 @@
   become_user: "{{ pretalx_system_user }}"
   tags:
     - pretalx
+    - pretalx-update
 
 - name: Install pretalx (versioned)
   pip:
@@ -69,6 +70,7 @@
   become_user: "{{ pretalx_system_user }}"
   tags:
     - pretalx
+    - pretalx-update
 
 - name: Install pretalx (git)
   pip:
@@ -87,6 +89,7 @@
   become_user: "{{ pretalx_system_user }}"
   tags:
     - pretalx
+    - pretalx-update
 
 - name: Configure pretalx
   template:
@@ -102,6 +105,7 @@
   become_user: "{{ pretalx_system_user }}"
   tags:
     - pretalx
+    - pretalx-update
 
 - name: Install systemd socket
   template:
