@@ -13,16 +13,6 @@
     name: nginx
     state: reloaded
 
-- name: Restart pretalx service
-  service:
-    name: pretalx@{{ pretalx_instance_identifier }}
-    state: restarted
-
-- name: Restart worker service
-  service:
-    name: pretalx-worker@{{ pretalx_instance_identifier }}
-    state: restarted
-
 - name: Restart pretalx socket
   service:
     name: pretalx@{{ pretalx_instance_identifier }}.socket
@@ -30,6 +20,11 @@
 
 - name: Run pretalx migrations
   command: python -m pretalx migrate
+  become: true
+  become_user: "{{ pretalx_system_user }}"
+
+- name: Compile pretalx messages
+  command: python -m pretalx compilemessages
   become: true
   become_user: "{{ pretalx_system_user }}"
 
@@ -43,7 +38,12 @@
   become: true
   become_user: "{{ pretalx_system_user }}"
 
-- name: Compile pretalx messages
-  command: python -m pretalx compilemessages
-  become: true
-  become_user: "{{ pretalx_system_user }}"
+- name: Restart pretalx service
+  service:
+    name: pretalx@{{ pretalx_instance_identifier }}
+    state: restarted
+
+- name: Restart worker service
+  service:
+    name: pretalx-worker@{{ pretalx_instance_identifier }}
+    state: restarted
