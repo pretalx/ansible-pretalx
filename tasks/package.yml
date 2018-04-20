@@ -161,3 +161,13 @@
     enabled: true
   tags:
     - pretalx
+
+- name:
+  template:
+    src: nginx.conf
+    dest: "{{ pretalx_nginx_path }}/pretalx_{{ pretalx_instance_identifier }}.conf"
+  when: pretalx_nginx
+  notify:
+    - Reload nginx
+  tags:
+    - pretalx

@@ -8,6 +8,11 @@
     name: redis
     state: restarted
 
+- name: Reload nginx
+  service:
+    name: nginx
+    state: reloaded
+
 - name: Restart pretalx service
   service:
     name: pretalx@{{ pretalx_instance_identifier }}
