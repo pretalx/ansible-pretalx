@@ -14,7 +14,8 @@ pretalx_staticfiles_directory: /usr/share/webapps/pretalx{{ pretalx_instance_ide
 pretalx_data_dir: /usr/share/webapps/pretalx{{ pretalx_instance_identifier }}/data/
 pretalx_media_dir: /usr/share/webapps/pretalx{{ pretalx_instance_identifier }}/media/
 pretalx_webserver_group: http
-pretalx_url: http://localhost
+pretalx_domain: localhost
+pretalx_url: https://{{ pretalx_domain }}
 
 pretalx_mail_from: admin@localhost
 pretalx_mail_host: localhost
