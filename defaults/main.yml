@@ -33,3 +33,5 @@ pretalx_celery_broker: "redis://127.0.0.1:6379/2"
 
 pretalx_version: latest
 pretalx_git_version: ""
+
+pretalx_plugins: null

@@ -107,7 +107,40 @@
   changed_when: true
   tags:
     - pretalx
-    - pretalx-update
+    - pretalxupdate
+
+- name: Make sure plugin directory exists
+  file:
+    path: ~{{ pretalx_system_user }}/plugins
+    state: directory
+    owner: "{{ pretalx_system_user }}"
+    recurse: true
+  when: pretalx_plugins
+  tags:
+    - pretalx
+    - pretalxupdate
+
+- name: Install pretalx plugins
+  git:
+    repo: "{{ item.repository }}"
+    dest: ~{{ pretalx_system_user }}/plugins/{{ item.name }}
+    version: master
+    key_file: ~{{ pretalx_system_user }}/.ssh/id_rsa
+    accept_hostkey: yes
+  become: true
+  become_user: "{{ pretalx_system_user }}"
+  with_items: "{{ pretalx_plugins }}"
+  when: pretalx_plugins
+  notify:
+    - Restart pretalx service
+    - Run pretalx migrations
+    - Collect static pretalx files
+    - Compress static pretalx files
+    - Compile pretalx messages
+    - Install pretalx plugins
+  tags:
+    - pretalx
+    - pretalxupdate
 
 - name: Install systemd socket
   template:

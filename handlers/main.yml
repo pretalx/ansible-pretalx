@@ -3,20 +3,17 @@
   systemd:
     daemon_reload: yes
 
-- name: Restart redis
-  service:
-    name: redis
-    state: restarted
+- name: Install pretalx plugins
+  shell: cd ~/plugins/{{ item.name }} && python setup.py develop --user
+  with_items: "{{ pretalx_plugins }}"
+  become: true
+  become_user: "{{ pretalx_system_user }}"
 
-- name: Reload nginx
-  service:
-    name: nginx
-    state: reloaded
-
-- name: Restart pretalx socket
-  service:
-    name: pretalx@{{ pretalx_instance_identifier }}.socket
-    state: restarted
+- name: Compile messages for plugins
+  shell: cd ~{{ pretalx_system_user }}/plugins/{{ item.name }} && make
+  with_items: "{{ pretalx_plugins }}"
+  become: true
+  become_user: "{{ pretalx_system_user }}"
 
 - name: Run pretalx migrations
   command: python -m pretalx migrate
@@ -46,4 +43,19 @@
 - name: Restart worker service
   service:
     name: pretalx-worker@{{ pretalx_instance_identifier }}
+    state: restarted
+
+- name: Restart redis
+  service:
+    name: redis
+    state: restarted
+
+- name: Reload nginx
+  service:
+    name: nginx
+    state: reloaded
+
+- name: Restart pretalx socket
+  service:
+    name: pretalx@{{ pretalx_instance_identifier }}.socket
     state: restarted
