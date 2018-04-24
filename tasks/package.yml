@@ -16,6 +16,8 @@
     - "{{ pretalx_staticfiles_directory }}"
     - "{{ pretalx_data_dir }}"
     - "{{ pretalx_media_dir }}"
+  tags:
+    - pretalx
 
 - name: Install pretalx dependencies
   pip:
@@ -49,7 +51,7 @@
   become_user: "{{ pretalx_system_user }}"
   tags:
     - pretalx
-    - pretalx-update
+    - pretalxupdate
 
 - name: Install pretalx (latest)
   pip:
@@ -68,7 +70,7 @@
   become_user: "{{ pretalx_system_user }}"
   tags:
     - pretalx
-    - pretalx-update
+    - pretalxupdate
 
 - name: Install pretalx (versioned)
   pip:
@@ -87,7 +89,7 @@
   become_user: "{{ pretalx_system_user }}"
   tags:
     - pretalx
-    - pretalx-update
+    - pretalxupdate
 
 - name: Install pretalx (git)
   pip:

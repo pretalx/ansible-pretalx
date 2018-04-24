@@ -1,5 +1,5 @@
 ---
 - name: Install system requirements
-  include_tasks: requirements.yml
+  import_tasks: requirements.yml
 - name: Install pretalx itself
-  include_tasks: package.yml
+  import_tasks: package.yml
