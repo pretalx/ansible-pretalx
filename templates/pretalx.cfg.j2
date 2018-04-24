@@ -13,6 +13,7 @@ port = {{ pretalx_database_port }}
 
 [site]
 url = {{ pretalx_url }}
+{% if pretalx_secret_key %}secret = {{ pretalx_secret_key }}{% endif %}
 
 [mail]
 from = {{ pretalx_mail_from }}
