@@ -19,21 +19,15 @@
   tags:
     - pretalx
 
-- name: Install pretalx dependencies
+- name: Install redis client
   pip:
-    name: "{{ item }}"
+    name: django_redis
     executable: pip3
     extra_args: --user
     state: latest
-  with_items:
-    - gunicorn
-    - pip
-    - redis
-    - setuptools
-    - wheel
-    - psycopg2-binary
   become: true
   become_user: "{{ pretalx_system_user }}"
+  when: pretalx_redis is defined
   tags:
     - pretalx
 
