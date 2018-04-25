@@ -33,3 +33,8 @@ broker = {{ pretalx_celery_broker }}
 location = {{ pretalx_redis }}
 sessions = True
 {% endif %}
+
+{% if pretalx_admin_mail %}
+[logging]
+email = {{ pretalx_admin_mail }}
+{% endif %}

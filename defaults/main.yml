@@ -17,6 +17,7 @@ pretalx_webserver_group: http
 pretalx_domain: localhost
 pretalx_url: https://{{ pretalx_domain }}
 
+pretalx_admin_mail: ""
 pretalx_mail_from: admin@localhost
 pretalx_mail_host: localhost
 pretalx_mail_port: 25
