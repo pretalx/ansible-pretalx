@@ -37,3 +37,5 @@ pretalx_version: latest
 pretalx_git_version: ""
 
 pretalx_plugins: null
+
+pretalx_cron: true
