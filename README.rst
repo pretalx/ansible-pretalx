@@ -12,5 +12,5 @@ To use it in your ansible playbook, either clone this git repository next to you
 
 or install it with ansible-galaxy_.
 
-.. _pretalx: https://pretalx.org
+.. _pretalx: https://pretalx.com
 .. _ansible-galaxy: https://galaxy.ansible.com/
