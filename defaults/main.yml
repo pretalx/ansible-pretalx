@@ -39,3 +39,5 @@ pretalx_git_version: ""
 pretalx_plugins: null
 
 pretalx_cron: true
+
+pretalx_alternate_domains: null  # can be a string like "location1 location2"

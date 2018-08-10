@@ -30,6 +30,7 @@
   when: pretalx_redis is defined
   tags:
     - pretalx
+    - pretalx-install
 
 - name: Configure pretalx
   template:
@@ -198,7 +199,7 @@
   tags:
     - pretalx
 
-- name:
+- name: Install nginx config
   template:
     src: nginx.conf
     dest: "{{ pretalx_nginx_path }}/pretalx_{{ pretalx_instance_identifier }}.conf"
