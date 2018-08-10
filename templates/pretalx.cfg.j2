@@ -24,9 +24,9 @@ port = {{ pretalx_mail_port }}
 tls = {{ pretalx_mail_tls }}
 ssl = {{ pretalx_mail_ssl }}
 
-[celery]
+{% if pretalx_celery %}[celery]
 backend = {{ pretalx_celery_backend }}
-broker = {{ pretalx_celery_broker }}
+broker = {{ pretalx_celery_broker }}{% endif %}
 
 {% if pretalx_redis %}
 [redis]
