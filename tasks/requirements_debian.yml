@@ -1,7 +1,7 @@
 ---
 - name: Add unstable package sources
   apt_repository:
-    repo: deb http://ftp.de.debian.org/debian unstable main
+    repo: deb http://ftp.de.debian.org/debian buster main
     state: present
   tags:
     - pretalx
@@ -10,7 +10,7 @@
   apt:
     name: "{{ item }}"
     state: latest
-    default_release: unstable
+    default_release: buster
   with_items:
     - python3.6
     - python3-pip
