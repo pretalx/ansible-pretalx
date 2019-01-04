@@ -6,6 +6,6 @@ After=network.target
 [Service]
 User=pretalx_%i
 WorkingDirectory=/home/pretalx_%i/.local/lib/python{{ pretalx_system_python_version }}/site-packages/pretalx
-ExecStart=/home/pretalx_%i/.local/bin/gunicorn --bind unix:/run/gunicorn/pretalx_%i pretalx.wsgi
+ExecStart=/home/pretalx_%i/.local/bin/gunicorn --bind unix:/run/gunicorn/pretalx_%i --workers 4 --backlog 128 -t 45 --log-level debug pretalx.wsgi
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID

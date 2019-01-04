@@ -207,7 +207,9 @@
   notify:
     - Reload nginx
   tags:
+    - nginx
     - pretalx
+    - pretalxnginx
 
 - name: Install runperiodic cronjob
   cron:
