@@ -16,6 +16,7 @@ pretalx_media_dir: /usr/share/webapps/pretalx{{ pretalx_instance_identifier }}/m
 pretalx_webserver_group: http
 pretalx_domain: localhost
 pretalx_url: https://{{ pretalx_domain }}
+pretalx_core_modules: ""
 
 pretalx_admin_mail: ""
 pretalx_mail_from: admin@localhost
