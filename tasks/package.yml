@@ -119,7 +119,6 @@
   when: pretalx_plugins
   tags:
     - pretalx
-    - pretalxupdate
 
 - name: Install pretalx plugins
   git:
