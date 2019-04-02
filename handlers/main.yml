@@ -25,6 +25,11 @@
   become: true
   become_user: "{{ pretalx_system_user }}"
 
+- name: Compile pretalx styles
+  command: python -m pretalx regenerate_css
+  become: true
+  become_user: "{{ pretalx_system_user }}"
+
 - name: Collect static pretalx files
   command: python -m pretalx collectstatic --noinput
   become: true
