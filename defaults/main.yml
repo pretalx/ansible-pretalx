@@ -27,8 +27,8 @@ pretalx_mail_password: password
 pretalx_mail_tls: "False"
 pretalx_mail_ssl: "True"
 
-pretalx_ngninx: false
-pretalx_ngninx_path: false
+pretalx_nginx: false
+pretalx_nginx_path: false
 
 pretalx_celery: true
 pretalx_celery_backend: "redis://127.0.0.1:6379/1"
