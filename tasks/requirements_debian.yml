@@ -36,6 +36,7 @@
       - gcc
       - gettext
       - git
+      - redis-server
       - sqlite3
     state: present
   tags:
