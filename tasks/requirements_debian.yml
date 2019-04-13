@@ -6,23 +6,38 @@
   tags:
     - pretalx
 
-- name: Install Python 3.6
+- name: Install Python 3.7
   apt:
-    name: "{{ item }}"
+    name:
+      - python3.7
+      - python3.7-dev
+      - python3-pip
+      - python3-wheel
     state: latest
     default_release: buster
-  with_items:
-    - python3.6
-    - python3-pip
+  tags:
+    - pretalx
+
+- name: Install python-setuptools if Ansible is running with Python 2
+  # The Ansible pip module needs setuptools available in the Python version
+  # under which Ansible is running.
+  # See https://github.com/ansible/ansible/issues/47361#issuecomment-433892723
+  # for a more detailed explaination.
+  apt:
+    name: python-setuptools
+    state: present
+  when: ansible_python.version.major|int == 2
   tags:
     - pretalx
 
 - name: Install other dependencies
   apt:
-    name: "{{ item }}"
+    name:
+      - gcc
+      - gettext
+      - git
+      - redis-server
+      - sqlite3
     state: present
-  with_items:
-    - git
-    - sqlite3
   tags:
     - pretalx
