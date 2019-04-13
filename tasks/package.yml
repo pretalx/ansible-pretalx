@@ -50,9 +50,33 @@
     - pretalx
     - pretalxupdate
 
+- name: Set pretalx_extra to "[postgres]" if using postgresql database
+  set_fact:
+    pretalx_extra: "[postgres]"
+  when: pretalx_database_backend == 'postgresql'
+  tags:
+    - pretalx
+    - pretalxupdate
+
+- name: Set pretalx_extra to "[mysql]" if using mysql database
+  set_fact:
+    pretalx_extra: "[mysql]"
+  when: pretalx_database_backend == 'mysql'
+  tags:
+    - pretalx
+    - pretalxupdate
+
+- name: Set pretalx_extra to "" if using other database
+  set_fact:
+    pretalx_extra: ""
+  when: pretalx_extra is not defined
+  tags:
+    - pretalx
+    - pretalxupdate
+
 - name: Install pretalx (latest)
   pip:
-    name: pretalx
+    name: "pretalx{{ pretalx_extra }}"
     executable: pip3
     extra_args: --user
     state: latest
@@ -73,7 +97,7 @@
 
 - name: Install pretalx (versioned)
   pip:
-    name: pretalx
+    name: "pretalx{{ pretalx_extra }}"
     executable: pip3
     extra_args: --user
     version: "{{ pretalx_version }}"
@@ -94,7 +118,7 @@
 
 - name: Install pretalx (git)
   pip:
-    name: git+git://github.com/pretalx/pretalx.git@{{ pretalx_git_version }}#egg=pretalx&subdirectory=src
+    name: "git+git://github.com/pretalx/pretalx.git@{{ pretalx_git_version }}#egg=pretalx{{ pretalx_extra }}&subdirectory=src"
     executable: pip3
     extra_args: --user
     state: latest
