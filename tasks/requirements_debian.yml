@@ -6,10 +6,10 @@
   tags:
     - pretalx
 
-- name: Install Python 3.6
+- name: Install Python 3.7
   apt:
     name:
-      - python3.6
+      - python3.7
       - python3-pip
     state: latest
     default_release: buster
