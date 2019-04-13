@@ -220,7 +220,7 @@
     minute: 40
     name: Run pretalx{{ pretalx_instance_identifier }} periodic task
     user: "{{ pretalx_system_user }}"
-    job: "python -m pretalx runperiodic"
+    job: "python{{ pretalx_system_python_version }} -m pretalx runperiodic"
   when: pretalx_cron
   tags:
     - pretalx

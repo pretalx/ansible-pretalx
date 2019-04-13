@@ -4,7 +4,7 @@
     daemon_reload: yes
 
 - name: Install pretalx plugins
-  shell: cd ~/plugins/{{ item.name }} && python setup.py develop --user
+  shell: cd ~/plugins/{{ item.name }} && python{{ pretalx_system_python_version }} setup.py develop --user
   with_items: "{{ pretalx_plugins }}"
   become: true
   become_user: "{{ pretalx_system_user }}"
@@ -16,27 +16,27 @@
   become_user: "{{ pretalx_system_user }}"
 
 - name: Run pretalx migrations
-  command: python -m pretalx migrate
+  command: python{{ pretalx_system_python_version }} -m pretalx migrate
   become: true
   become_user: "{{ pretalx_system_user }}"
 
 - name: Compile pretalx messages
-  command: python -m pretalx compilemessages
+  command: python{{ pretalx_system_python_version }} -m pretalx compilemessages
   become: true
   become_user: "{{ pretalx_system_user }}"
 
 - name: Compile pretalx styles
-  command: python -m pretalx regenerate_css
+  command: python{{ pretalx_system_python_version }} -m pretalx regenerate_css
   become: true
   become_user: "{{ pretalx_system_user }}"
 
 - name: Collect static pretalx files
-  command: python -m pretalx collectstatic --noinput
+  command: python{{ pretalx_system_python_version }} -m pretalx collectstatic --noinput
   become: true
   become_user: "{{ pretalx_system_user }}"
 
 - name: Compress static pretalx files
-  command: python -m pretalx compress
+  command: python{{ pretalx_system_python_version }} -m pretalx compress
   become: true
   become_user: "{{ pretalx_system_user }}"
 
