@@ -45,3 +45,5 @@ sessions = True
 [logging]
 email = {{ pretalx_admin_mail }}
 {% endif %}
+
+{% if pretalx_additional_config %}{{ pretalx_additional_config }}{% endif %}
