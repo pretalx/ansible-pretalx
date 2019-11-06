@@ -32,6 +32,18 @@
     - pretalx
     - pretalx-install
 
+- name: Install gunicorn
+  pip:
+    name: gunicorn
+    executable: pip3
+    extra_args: --user
+    state: latest
+  become: true
+  become_user: "{{ pretalx_system_user }}"
+  tags:
+    - pretalx
+    - pretalx-install
+
 - name: Configure pretalx
   template:
     src: pretalx.cfg.j2
