@@ -35,9 +35,9 @@ ssl = {{ pretalx_mail_ssl }}
 backend = {{ pretalx_celery_backend }}
 broker = {{ pretalx_celery_broker }}{% endif %}
 
-{% if pretalx_redis %}
+{% if pretalx_redis_location %}
 [redis]
-location = {{ pretalx_redis }}
+location = {{ pretalx_redis_location }}
 sessions = True
 {% endif %}
 
