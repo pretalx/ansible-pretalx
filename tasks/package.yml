@@ -242,8 +242,8 @@
 - name: Install nginx config
   template:
     src: nginx.conf
-    dest: "{{ pretalx_nginx_conf_dir }}/pretalx_{{ pretalx_instance_identifier }}.conf"
-  when: pretalx_nginx_conf_dir != false
+    dest: "{{ pretalx_nginx_path }}/pretalx_{{ pretalx_instance_identifier }}.conf"
+  when: pretalx_nginx
   notify:
     - Reload nginx
   tags:

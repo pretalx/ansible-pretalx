@@ -68,9 +68,9 @@ Please don't use this verbatim in production. The secret key should be a random 
         postgresql_ctype: "C.UTF-8"
         pretalx_database_password: "secret1"
         pretalx_secret_key: "secret2"
-        pretalx_redis_location: false
-        pretalx_nginx_conf_dir: "/etc/nginx/sites-enabled/"
-        pretalx_tls: false
+        pretalx_redis: false
+        pretalx_nginx: true
+        pretalx_nginx_path: "/etc/nginx/sites-enabled/"
 
 4. Run Ansible! ::
 
