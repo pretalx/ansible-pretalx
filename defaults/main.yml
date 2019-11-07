@@ -28,6 +28,7 @@ pretalx_mail_tls: "False"
 pretalx_mail_ssl: "True"
 
 pretalx_nginx_conf_dir: false
+pretalx_tls: true
 
 pretalx_redis_location: false
 
