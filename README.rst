@@ -48,6 +48,10 @@ The following steps were tested on Debian 10:
               - nginx
               - python3-pip
             state: latest
+        - name: Remove nginx default site
+          file:
+            name: "/etc/nginx/sites-enabled/default"
+            state: absent
     - hosts: localhost
       become: true
       roles:
