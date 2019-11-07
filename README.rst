@@ -33,9 +33,9 @@ The following steps were tested on Debian 10:
 
 3. Write a playbook that uses both ``ansible-pretalx`` and ``anxs.postgresql``, installs Nginx, and configures everything by setting variables.
 
-  Give this file any name, such as ``pretalx.yml``. Save this file in the parent dir containing ``ansible-pretalx/``. That is, if you cloned this repo in your homedir, put ``pretalx.yml`` in your homedir. 
+Give this file any name, such as ``pretalx.yml``. Save this file in the parent dir containing ``ansible-pretalx/``. That is, if you cloned this repo in your homedir, put ``pretalx.yml`` in your homedir. 
 
-  Please don't use this verbatim in production. The secret key should be a random string, and the Postgres user password should be a different random string. ::
+Please don't use this verbatim in production. The secret key should be a random string, and the Postgres user password should be a different random string. ::
 
     ---
     - hosts: localhost
@@ -76,11 +76,11 @@ The following steps were tested on Debian 10:
 
     $ ansible-playbook pretalx.yml
 
-  If anything goes wrong, check:
+If anything goes wrong, check:
 
-  * Ansible's output
-  * ``journalctl -u 'pretalx*'``
-  * ``/usr/share/webapps/pretalxevent/data/logs/pretalx.log``
+* Ansible's output
+* ``journalctl -u 'pretalx*'``
+* ``/usr/share/webapps/pretalxevent/data/logs/pretalx.log``
 
 5. Finally, set up your Pretalx instance::
 
