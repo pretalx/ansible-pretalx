@@ -63,11 +63,11 @@ The following steps were tested on Debian 10:
             owner: "{{ pretalx_database_user }}"
         postgresql_users:
           - name: "{{ pretalx_database_user }}"
-            pass: "{{ pretalx_secret_key }}"
+            pass: "{{ pretalx_database_password }}"
         postgresql_locale: "C.UTF-8"
         postgresql_ctype: "C.UTF-8"
-        pretalx_database_password: "{{ pretalx_secret_key }}"
-        pretalx_secret_key: "secret"
+        pretalx_database_password: "secret1"
+        pretalx_secret_key: "secret2"
         pretalx_redis_location: false
         pretalx_nginx_conf_dir: "/etc/nginx/sites-enabled/"
         pretalx_tls: false
