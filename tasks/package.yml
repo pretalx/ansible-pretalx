@@ -243,7 +243,7 @@
   template:
     src: nginx.conf
     dest: "{{ pretalx_nginx_conf_dir }}/pretalx_{{ pretalx_instance_identifier }}.conf"
-  when: pretalx_nginx_conf_dir
+  when: pretalx_nginx_conf_dir != false
   notify:
     - Reload nginx
   tags:
