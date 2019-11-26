@@ -29,6 +29,7 @@ pretalx_mail_ssl: "True"
 
 pretalx_nginx: false
 pretalx_nginx_path: false
+pretalx_nginx_force_https: true
 
 pretalx_redis: false
 
