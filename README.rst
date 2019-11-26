@@ -71,6 +71,7 @@ Please don't use this verbatim in production. The secret key should be a random 
         pretalx_redis: false
         pretalx_nginx: true
         pretalx_nginx_path: "/etc/nginx/sites-enabled/"
+        pretalx_nginx_force_https: true
 
 4. Run Ansible! ::
 
