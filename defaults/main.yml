@@ -1,7 +1,7 @@
 ---
 pretalx_instance_identifier: "event"  # used if you have more than one instance on your server
 
-pretalx_system_python_version: "3.6"
+pretalx_system_python_version: "3.7"
 
 pretalx_database_backend: postgresql
 pretalx_database_name: pretalx{{ pretalx_instance_identifier }}
@@ -29,6 +29,9 @@ pretalx_mail_ssl: "True"
 
 pretalx_nginx: false
 pretalx_nginx_path: false
+pretalx_nginx_force_https: true
+
+pretalx_redis: false
 
 pretalx_celery: true
 pretalx_celery_backend: "redis://127.0.0.1:6379/1"
