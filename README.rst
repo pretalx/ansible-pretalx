@@ -23,7 +23,7 @@ You will need an Ansible playbook that uses this role, a database for Pretalx to
 
 You can configure variables in that playbook, overriding anything in the defaults_.
 
-The following steps were tested on Debian 10:
+The following steps were tested on Debian 10, Ansible 2.7.7, and Pretalx 1.0.4:
 
 0. First, make sure `Ansible is installed`_
 1. Clone this repo somewhere, such as your home directory
