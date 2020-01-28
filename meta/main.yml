@@ -13,5 +13,11 @@ galaxy_info:
     - schedule
     - program
     - cfp
-
-dependencies: []
+  platforms:
+    - name: Archlinux
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - stretch
+  dependencies: []
