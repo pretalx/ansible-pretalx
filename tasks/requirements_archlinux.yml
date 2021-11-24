@@ -1,26 +1,17 @@
 ---
-- name: Install Python 3.6
+- name: Install dependencies
   pacman:
-    name: "{{ item }}"
+    name:
+      - python
+      - git
+      - sqlite
+      - redis
     state: latest
-  with_items:
-    - python
-  tags:
-    - pretalx
-
-- name: Install other dependencies
-  pacman:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - git
-    - sqlite
-    - redis
-  tags:
-    - pretalx
   notify:
     - Reload systemd services
     - Restart redis
+  tags:
+    - pretalx
 
 - name: Start and enable redis
   service:
