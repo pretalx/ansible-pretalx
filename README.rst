@@ -11,6 +11,12 @@ To use it in your ansible playbook, either clone this git repository next to you
 You can find the variables you can set here_, along with their default values. Please refer
 to the `pretalx configuration documentation`_ for further details.
 
+This role comes with some tags, to make some steps faster or easier to contain. Tags include
+
+- ``pretalx``: All tasks are tagged like this, to help if you want to add more tasks to the pretalx tag
+- ``pretalxupdate``: All steps necessary to just update a running instance
+- ``pretalx-install``: Some initial install steps.
+
 .. _pretalx: https://pretalx.com
 .. _ansible-galaxy: https://galaxy.ansible.com/
 .. _here: https://github.com/pretalx/ansible-pretalx/blob/master/defaults/main.yml
