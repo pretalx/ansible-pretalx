@@ -48,6 +48,7 @@
   template:
     src: pretalx.cfg.j2
     dest: ~/.pretalx.cfg
+    mode: "0644"
   notify:
     - Restart pretalx service
     - Restart worker service
@@ -142,7 +143,7 @@
     - Compress static pretalx files
     - Compile pretalx messages
     - Compile pretalx styles
-  when: (pretalx_git_version != "")
+  when: pretalx_git_version | length > 0
   become: true
   become_user: "{{ pretalx_system_user }}"
   changed_when: true
@@ -188,6 +189,7 @@
   template:
     src: pretalx.socket.j2
     dest: /etc/systemd/system/pretalx@.socket
+    mode: "0644"
   notify:
     - Reload systemd services
     - Restart pretalx socket
@@ -198,6 +200,7 @@
   template:
     src: pretalx.service.j2
     dest: /etc/systemd/system/pretalx@.service
+    mode: "0644"
   notify:
     - Reload systemd services
     - Restart pretalx service
@@ -209,6 +212,7 @@
   template:
     src: pretalx-worker.service.j2
     dest: /etc/systemd/system/pretalx-worker@.service
+    mode: "0644"
   notify:
     - Reload systemd services
     - Restart worker service
@@ -243,6 +247,7 @@
   template:
     src: nginx.conf
     dest: "{{ pretalx_nginx_path }}/pretalx_{{ pretalx_instance_identifier }}.conf"
+    mode: "0644"
   when: pretalx_nginx
   notify:
     - Reload nginx
