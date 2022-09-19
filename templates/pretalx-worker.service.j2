@@ -9,6 +9,8 @@ WorkingDirectory=/home/pretalx_%i/.local/lib/python{{ pretalx_system_python_vers
 ExecStart=/home/pretalx_%i/.local/bin/celery -A pretalx.celery_app worker -l info
 WorkingDirectory=/home/pretalx_%i
 Restart=on-failure
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
 
 [Install]
 WantedBy=multi-user.target
