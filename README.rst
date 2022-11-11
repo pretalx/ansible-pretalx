@@ -96,3 +96,10 @@ If anything goes wrong, check:
 .. _defaults: https://github.com/pretalx/ansible-pretalx/blob/master/defaults/main.yml
 .. _Ansible is installed: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
 .. _ANXS' Postgres role in Ansible Galaxy: https://galaxy.ansible.com/ANXS/postgresql
+
+Running migrations
+-----------
+
+If you need to run migrations after installation is complete, you can use::
+   
+   $ sudo -u pretalx_event python3 -m pretalx migrate
