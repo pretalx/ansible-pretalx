@@ -1,11 +1,4 @@
 ---
-- name: Add unstable package sources
-  apt_repository:
-    repo: deb http://ftp.de.debian.org/debian buster main
-    state: present
-  tags:
-    - pretalx
-
 - name: Install Python 3
   apt:
     name:
@@ -15,18 +8,6 @@
       - python3-wheel
     state: latest
     default_release: buster
-  tags:
-    - pretalx
-
-- name: Install python-setuptools if Ansible is running with Python 2
-  # The Ansible pip module needs setuptools available in the Python version
-  # under which Ansible is running.
-  # See https://github.com/ansible/ansible/issues/47361#issuecomment-433892723
-  # for a more detailed explaination.
-  apt:
-    name: python-setuptools
-    state: present
-  when: ansible_python.version.major|int == 2
   tags:
     - pretalx
 
