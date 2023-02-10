@@ -3,6 +3,7 @@
   user:
     name: "{{ pretalx_system_user }}"
     state: present
+    system: true
   tags:
     - pretalx
 
