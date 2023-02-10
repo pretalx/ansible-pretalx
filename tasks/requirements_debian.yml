@@ -7,7 +7,6 @@
       - python3-pip
       - python3-wheel
     state: latest
-    default_release: buster
   tags:
     - pretalx
 
