@@ -38,7 +38,7 @@ broker = {{ pretalx_celery_broker }}{% endif %}
 {% if pretalx_redis %}
 [redis]
 location = {{ pretalx_redis }}
-sessions = True
+session = True
 {% endif %}
 
 {% if pretalx_admin_mail %}
