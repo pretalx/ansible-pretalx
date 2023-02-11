@@ -132,7 +132,7 @@
 
 - name: Install pretalx (git)
   pip:
-    name: "git+git://github.com/pretalx/pretalx.git@{{ pretalx_git_version }}#egg=pretalx{{ pretalx_extra }}&subdirectory=src"
+    name: "git+{{ pretalx_git_url }}@{{ pretalx_git_version }}#egg=pretalx{{ pretalx_extra }}&subdirectory=src"
     executable: pip3
     extra_args: --user
     state: latest
