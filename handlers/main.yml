@@ -49,11 +49,13 @@
   service:
     name: pretalx-worker@{{ pretalx_instance_identifier }}
     state: restarted
+  when: pretalx_celery
 
 - name: Restart redis
   service:
     name: redis
     state: restarted
+  when: pretalx_redis
 
 - name: Reload nginx
   service:
