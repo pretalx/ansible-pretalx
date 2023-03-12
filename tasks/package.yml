@@ -166,7 +166,7 @@
   git:
     repo: "{{ item.repository }}"
     dest: ~{{ pretalx_system_user }}/plugins/{{ item.name }}
-    version: master
+    version: "{{ item.version if item.version is defined else 'main' }}"
     key_file: ~{{ pretalx_system_user }}/.ssh/id_rsa
     accept_hostkey: yes
   become: true
