@@ -13,7 +13,6 @@ pretalx_database_port: 5432
 pretalx_staticfiles_directory: /usr/share/webapps/pretalx{{ pretalx_instance_identifier }}/static/
 pretalx_data_dir: /usr/share/webapps/pretalx{{ pretalx_instance_identifier }}/data/
 pretalx_media_dir: /usr/share/webapps/pretalx{{ pretalx_instance_identifier }}/media/
-pretalx_webserver_group: http
 pretalx_domain: localhost
 pretalx_url: https://{{ pretalx_domain }}
 pretalx_core_modules: ""

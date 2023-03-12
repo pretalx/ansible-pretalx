@@ -1,5 +1,4 @@
 ---
 pretalx_system_user: pretalx_{{ pretalx_instance_identifier }}
-pretalx_system_group: pretalx_{{ pretalx_instance_identifier }}
 pretalx_system_home: /home/{{ pretalx_system_user }}
 pretalx_cert_root: /etc/ssl/letsencrypt/certs
