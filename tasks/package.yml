@@ -12,6 +12,8 @@
     path: "{{ item }}"
     state: directory
     owner: "{{ pretalx_system_user }}"
+    group: "{{ pretalx_webserver_group }}"
+    mode: "0750"
     recurse: yes
   with_items:
     - "{{ pretalx_staticfiles_directory }}"
