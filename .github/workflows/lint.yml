@@ -27,4 +27,4 @@ jobs:
       - name: Install ansible-lint
         run: pip install --user ansible-lint
       - name: Run ansible-lint
-        run: ansible-lint -x ANSIBLE0010 -x 602 .
+        run: ansible-lint .

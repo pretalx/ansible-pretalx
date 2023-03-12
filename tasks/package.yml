@@ -14,7 +14,7 @@
     owner: "{{ pretalx_system_user }}"
     group: "{{ pretalx_webserver_group }}"
     mode: "0750"
-    recurse: yes
+    recurse: true
   with_items:
     - "{{ pretalx_staticfiles_directory }}"
     - "{{ pretalx_data_dir }}"
@@ -95,7 +95,7 @@
     name: "pretalx{{ pretalx_extra }}"
     executable: pip3
     extra_args: --user
-    state: latest
+    state: latest  # noqa package-latest
   notify:
     - Restart pretalx service
     - Restart worker service
@@ -137,7 +137,7 @@
     name: "git+{{ pretalx_git_url }}@{{ pretalx_git_version }}#egg=pretalx{{ pretalx_extra }}&subdirectory=src"
     executable: pip3
     extra_args: --user
-    state: latest
+    state: latest  # noqa package-latest
   notify:
     - Restart pretalx service
     - Restart worker service
@@ -170,7 +170,7 @@
     dest: "{{ pretalx_system_home }}/plugins/{{ item.name }}"
     version: "{{ item.version if item.version is defined else 'main' }}"
     key_file: "{{ pretalx_system_home }}/.ssh/id_rsa"
-    accept_hostkey: yes
+    accept_hostkey: true
   become: true
   become_user: "{{ pretalx_system_user }}"
   with_items: "{{ pretalx_plugins }}"

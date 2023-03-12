@@ -1,2 +1,7 @@
 skip_list:
-  - '403'
+  - fqcn-builtins
+  - line-length
+
+exclude_paths:
+  - .github
+  - meta

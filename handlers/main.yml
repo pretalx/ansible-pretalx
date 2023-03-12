@@ -1,7 +1,7 @@
 ---
 - name: Reload systemd services
   systemd:
-    daemon_reload: yes
+    daemon_reload: true
 
 - name: Install pretalx plugins
   shell: cd {{ pretalx_system_home }}/plugins/{{ item.name }} && python{{ pretalx_system_python_version }} setup.py develop --user
