@@ -4,12 +4,31 @@
     name:
       - python
       - git
-      - sqlite
-      - redis
     state: latest
   notify:
     - Reload systemd services
+  tags:
+    - pretalx
+
+- name: Install sqlite
+  pacman:
+    name:
+      - sqlite
+    state: latest
+  notify:
+    - Reload systemd services
+  when: pretalx_database_backend != 'postgresql' and pretalx_database_backend != 'mysql'
+  tags:
+    - pretalx
+
+- name: Install redis
+  pacman:
+    name:
+      - redis
+    state: latest
+  notify:
     - Restart redis
+  when: pretalx_redis
   tags:
     - pretalx
 
@@ -18,5 +37,6 @@
     name: redis
     state: started
     enabled: true
+  when: pretalx_redis
   tags:
     - pretalx
