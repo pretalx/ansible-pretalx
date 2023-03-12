@@ -42,12 +42,12 @@
 
 - name: Restart pretalx service
   service:
-    name: pretalx@{{ pretalx_instance_identifier }}
+    name: pretalx_{{ pretalx_instance_identifier }}
     state: restarted
 
 - name: Restart worker service
   service:
-    name: pretalx-worker@{{ pretalx_instance_identifier }}
+    name: pretalx-worker_{{ pretalx_instance_identifier }}
     state: restarted
 
 - name: Restart redis
@@ -62,5 +62,5 @@
 
 - name: Restart pretalx socket
   service:
-    name: pretalx@{{ pretalx_instance_identifier }}.socket
+    name: pretalx_{{ pretalx_instance_identifier }}.socket
     state: restarted

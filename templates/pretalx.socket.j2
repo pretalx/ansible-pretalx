@@ -1,8 +1,8 @@
 [Unit]
-Description=pretalx_%I gunicorn socket
+Description=pretalx_{{ pretalx_instance_identifier }} gunicorn socket
 
 [Socket]
-ListenStream=/run/gunicorn/pretalx_%i
+ListenStream=/run/gunicorn/pretalx_{{ pretalx_instance_identifier }}
 
 [Install]
 WantedBy=sockets.target
