@@ -167,10 +167,6 @@
 - name: Install pretalx plugins
   git:
     repo: "{{ item.repository }}"
-    dest: ~{{ pretalx_system_user }}/plugins/{{ item.name }}
-    version: "{{ item.version if item.version is defined else 'main' }}"
-    key_file: ~{{ pretalx_system_user }}/.ssh/id_rsa
-
     dest: "{{ pretalx_system_home }}/plugins/{{ item.name }}"
     version: "{{ item.version if item.version is defined else 'main' }}"
     key_file: "{{ pretalx_system_home }}/.ssh/id_rsa"
