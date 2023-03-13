@@ -12,6 +12,8 @@
     path: "{{ item }}"
     state: directory
     owner: "{{ pretalx_system_user }}"
+    group: "{{ pretalx_webserver_group }}"
+    mode: "0750"
     recurse: yes
   with_items:
     - "{{ pretalx_staticfiles_directory }}"
@@ -48,7 +50,7 @@
 - name: Configure pretalx
   template:
     src: pretalx.cfg.j2
-    dest: ~/.pretalx.cfg
+    dest: "{{ pretalx_system_home }}/.pretalx.cfg"
     mode: "0644"
   notify:
     - Restart pretalx service
@@ -154,7 +156,7 @@
 
 - name: Make sure plugin directory exists
   file:
-    path: ~{{ pretalx_system_user }}/plugins
+    path: "{{ pretalx_system_home }}/plugins"
     state: directory
     owner: "{{ pretalx_system_user }}"
     recurse: true
@@ -165,9 +167,9 @@
 - name: Install pretalx plugins
   git:
     repo: "{{ item.repository }}"
-    dest: ~{{ pretalx_system_user }}/plugins/{{ item.name }}
-    version: master
-    key_file: ~{{ pretalx_system_user }}/.ssh/id_rsa
+    dest: "{{ pretalx_system_home }}/plugins/{{ item.name }}"
+    version: "{{ item.version if item.version is defined else 'main' }}"
+    key_file: "{{ pretalx_system_home }}/.ssh/id_rsa"
     accept_hostkey: yes
   become: true
   become_user: "{{ pretalx_system_user }}"
@@ -285,7 +287,7 @@
 
 - name: Install runperiodic cronjob
   cron:
-    minute: 40
+    minute: "40"
     name: Run pretalx{{ pretalx_instance_identifier }} periodic task
     user: "{{ pretalx_system_user }}"
     job: "python{{ pretalx_system_python_version }} -m pretalx runperiodic"

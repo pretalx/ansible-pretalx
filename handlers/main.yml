@@ -14,13 +14,13 @@
     - pretalx-worker@{{ pretalx_instance_identifier }}.service
 
 - name: Install pretalx plugins
-  shell: cd ~/plugins/{{ item.name }} && python{{ pretalx_system_python_version }} setup.py develop --user
+  shell: cd {{ pretalx_system_home }}/plugins/{{ item.name }} && python{{ pretalx_system_python_version }} setup.py develop --user
   with_items: "{{ pretalx_plugins }}"
   become: true
   become_user: "{{ pretalx_system_user }}"
 
 - name: Compile messages for plugins
-  shell: cd ~{{ pretalx_system_user }}/plugins/{{ item.name }} && make
+  shell: cd {{ pretalx_system_home }}/plugins/{{ item.name }} && make
   with_items: "{{ pretalx_plugins }}"
   become: true
   become_user: "{{ pretalx_system_user }}"
