@@ -1,5 +1,21 @@
 ---
 - name: Install system requirements
   import_tasks: requirements.yml
+
+- name: Detect installed system Python version
+  command: python3 -c "import sys; (major, minor) = sys.version_info[0:2]; print(f'{major}.{minor}')
+  args:
+    creates: nothing
+  changed_when: false
+  become: true
+  become_user: "{{ pretalx_system_user }}"
+  when: pretalx_system_python_version is not defined
+  register: pretalx_python_version_info_major_minor
+
+- name: Define installed system Python version variable
+  set_fact:
+    pretalx_system_python_version: "{{ pretalx_python_version_info_major_minor.stdout }}"
+  when: pretalx_system_python_version is not defined
+
 - name: Install pretalx itself
   import_tasks: package.yml
