@@ -270,10 +270,6 @@
   tags:
     - pretalx
 
-- name: Remove system-wide systemd socket
-  systemd:
-
-
 - name: Install nginx config
   template:
     src: nginx.conf
