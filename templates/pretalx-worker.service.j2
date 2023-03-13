@@ -1,16 +1,17 @@
 [Unit]
-Description=pretalx {{ pretalx_instance_identifier }} background worker
+Description=pretalx %I background worker
 After=network.target
 
 [Service]
-User={{ pretalx_system_user }}
-Group={{ pretalx_system_group }}
-WorkingDirectory={{ pretalx_system_home }}/.local/lib/python{{ pretalx_system_python_version }}/site-packages/pretalx
-ExecStart={{ pretalx_system_home }}/.local/bin/celery -A pretalx.celery_app worker -l info
-WorkingDirectory={{ pretalx_system_home }}
+User=%u
+User=%u
+Group=pretalx_%i
+WorkingDirectory=/home/%u/.local/lib/python{{ pretalx_system_python_version }}/site-packages/pretalx
+ExecStart=/home/%u/.local/bin/celery -A pretalx.celery_app worker -l info
+WorkingDirectory=/home/%u
 Restart=on-failure
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target

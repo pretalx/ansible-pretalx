@@ -186,10 +186,22 @@
     - pretalx
     - pretalxupdate
 
+- name: Uninstall system-wide systemd unit files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/systemd/system/pretalx@.socket
+    - /etc/systemd/system/pretalx@.service
+    - /etc/systemd/system/pretalx-worker@.service
+  notify:
+    - Stop system-wide systemd services
+    - Reload systemd services
+
 - name: Install systemd socket
   template:
     src: pretalx.socket.j2
-    dest: /etc/systemd/system/pretalx_{{ pretalx_instance_identifier }}.socket
+    dest: /etc/systemd/user/pretalx@.socket
     mode: "0644"
   notify:
     - Reload systemd services
@@ -200,19 +212,18 @@
 - name: Install systemd service
   template:
     src: pretalx.service.j2
-    dest: /etc/systemd/system/pretalx_{{ pretalx_instance_identifier }}.service
+    dest: /etc/systemd/user/pretalx@.service
     mode: "0644"
   notify:
     - Reload systemd services
     - Restart pretalx service
-    - Restart worker service
   tags:
     - pretalx
 
 - name: Install worker service
   template:
     src: pretalx-worker.service.j2
-    dest: /etc/systemd/system/pretalx-worker_{{ pretalx_instance_identifier }}.service
+    dest: /etc/systemd/user/pretalx-worker@.service
     mode: "0644"
   notify:
     - Reload systemd services
@@ -220,29 +231,48 @@
   tags:
     - pretalx
 
-- name: Start pretalx socket
-  service:
-    name: pretalx_{{ pretalx_instance_identifier }}.socket
-    state: started
+- name: Enable pretalx socket
+  systemd:
+    name: pretalx@{{ pretalx_instance_identifier }}.socket
     enabled: true
+    scope: user
+  become: true
+  become_user: "{{ pretalx_system_user }}"
+  notify:
+    - Reload systemd services
+    - Restart pretalx socket
   tags:
     - pretalx
 
-- name: Start systemd service
-  service:
-    name: pretalx_{{ pretalx_instance_identifier }}
-    state: started
+- name: Enable systemd service
+  systemd:
+    name: pretalx@{{ pretalx_instance_identifier }}
     enabled: true
+    scope: user
+  become: true
+  become_user: "{{ pretalx_system_user }}"
+  notify:
+    - Reload systemd services
+    - Restart pretalx service
   tags:
     - pretalx
 
-- name: Start worker service
-  service:
-    name: pretalx-worker_{{ pretalx_instance_identifier }}
-    state: started
+- name: Enable worker service
+  systemd:
+    name: pretalx-worker@{{ pretalx_instance_identifier }}
     enabled: true
+    scope: user
+  become: true
+  become_user: "{{ pretalx_system_user }}"
+  notify:
+    - Reload systemd services
+    - Restart worker service
   tags:
     - pretalx
+
+- name: Remove system-wide systemd socket
+  systemd:
+
 
 - name: Install nginx config
   template:

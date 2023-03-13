@@ -3,6 +3,16 @@
   systemd:
     daemon_reload: yes
 
+- name: Stop system-wide systemd services
+  service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  with_items:
+    - pretalx@{{ pretalx_instance_identifier }}.socket
+    - pretalx@{{ pretalx_instance_identifier }}.service
+    - pretalx-worker@{{ pretalx_instance_identifier }}.service
+
 - name: Install pretalx plugins
   shell: cd ~/plugins/{{ item.name }} && python{{ pretalx_system_python_version }} setup.py develop --user
   with_items: "{{ pretalx_plugins }}"
@@ -41,14 +51,20 @@
   become_user: "{{ pretalx_system_user }}"
 
 - name: Restart pretalx service
-  service:
-    name: pretalx_{{ pretalx_instance_identifier }}
+  systemd:
+    name: pretalx@{{ pretalx_instance_identifier }}
     state: restarted
+    scope: user
+  become: true
+  become_user: "{{ pretalx_system_user }}"
 
 - name: Restart worker service
-  service:
-    name: pretalx-worker_{{ pretalx_instance_identifier }}
+  systemd:
+    name: pretalx-worker@{{ pretalx_instance_identifier }}
     state: restarted
+    scope: user
+  become: true
+  become_user: "{{ pretalx_system_user }}"
 
 - name: Restart redis
   service:
@@ -61,6 +77,9 @@
     state: reloaded
 
 - name: Restart pretalx socket
-  service:
-    name: pretalx_{{ pretalx_instance_identifier }}.socket
+  systemd:
+    name: pretalx@{{ pretalx_instance_identifier }}.socket
     state: restarted
+    scope: user
+  become: true
+  become_user: "{{ pretalx_system_user }}"
