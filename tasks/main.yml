@@ -3,7 +3,8 @@
   import_tasks: requirements.yml
 
 - name: Detect installed system Python version
-  command: python3 -c "import sys; (major, minor) = sys.version_info[0:2]; print(f'{major}.{minor}')
+  command: |
+    python3 -c "import sys; (major, minor) = sys.version_info[0:2]; print(f'{major}.{minor}')"
   args:
     creates: nothing
   changed_when: false

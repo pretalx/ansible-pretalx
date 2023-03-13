@@ -1,12 +1,13 @@
+---
 galaxy_info:
+  namespace: pretalx
   role_name: pretalx
   author: Tobias Kunze
   description: Ansible role to install pretalx in a production environment
   company: pretalx
   issue_tracker_url: https://github.com/pretalx/ansible-pretalx
   license: Apache
-  min_ansible_version: 2.4
-  #github_branch:
+  min_ansible_version: "2.4"
   galaxy_tags:
     - pretalx
     - conference
@@ -14,10 +15,9 @@ galaxy_info:
     - program
     - cfp
   platforms:
-    - name: Archlinux
+    - name: ArchLinux
       versions:
         - all
     - name: Debian
       versions:
         - bullseye
-  dependencies: []

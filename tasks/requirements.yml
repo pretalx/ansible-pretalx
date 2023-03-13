@@ -1,2 +1,3 @@
 ---
-- include_tasks: requirements_{{ ansible_os_family|lower }}.yml
+- name: Install system requirements
+  include_tasks: requirements_{{ ansible_os_family | lower }}.yml

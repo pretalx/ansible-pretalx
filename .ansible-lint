@@ -1,7 +1,7 @@
 skip_list:
-  - fqcn-builtins
-  - line-length
+  - fqcn[action]
+  - fqcn[action-core]
+  - yaml[line-length]
 
 exclude_paths:
   - .github
-  - meta
