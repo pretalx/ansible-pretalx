@@ -6,7 +6,7 @@
       - git
       - sqlite
       - redis
-    state: latest
+    state: present
   notify:
     - Reload systemd services
     - Restart redis
