@@ -1,8 +1,8 @@
 ansible-pretalx
 ===============
 
-.. image:: https://travis-ci.org/pretalx/ansible-pretalx.svg?branch=master
-   :target: https://travis-ci.org/pretalx/ansible-pretalx
+.. image:: https://github.com/pretalx/ansible-pretalx/actions/workflows/lint.yml/badge.svg
+   :target: https://github.com/pretalx/ansible-pretalx/actions/workflows/lint.yml
 
 `ansible-pretalx` is an ansible role to install pretalx_ in a production environment.
 
