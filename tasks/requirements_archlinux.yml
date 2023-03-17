@@ -4,7 +4,7 @@
     name:
       - python
       - git
-    state: latest
+    state: present
   notify:
     - Reload systemd services
   tags:
@@ -14,7 +14,7 @@
   pacman:
     name:
       - sqlite
-    state: latest
+    state: present
   notify:
     - Reload systemd services
   when: pretalx_database_backend != 'postgresql' and pretalx_database_backend != 'mysql'
@@ -25,7 +25,7 @@
   pacman:
     name:
       - redis
-    state: latest
+    state: present
   notify:
     - Restart redis
   when: pretalx_redis
