@@ -4,9 +4,9 @@ Requires=pretalx@%i.socket
 After=network.target
 
 [Service]
-User=pretalx_%i
-Group=pretalx_%i
-WorkingDirectory=/home/pretalx_%i/.local/lib/python{{ pretalx_system_python_version }}/site-packages/pretalx
-ExecStart=/home/pretalx_%i/.local/bin/gunicorn --bind unix:/run/gunicorn/pretalx_%i --workers 4  --max-requests 1200  --max-requests-jitter 50 pretalx.wsgi
+User={{ pretalx_system_user_prefix }}%i
+Group={{ pretalx_system_user_prefix }}%i
+WorkingDirectory=/home/{{ pretalx_system_user_prefix }}%i/.local/lib/python{{ pretalx_system_python_version }}/site-packages/pretalx
+ExecStart=/home/{{ pretalx_system_user_prefix }}%i/.local/bin/gunicorn --bind unix:/run/gunicorn/pretalx_%i --workers 4  --max-requests 1200  --max-requests-jitter 50 pretalx.wsgi
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID

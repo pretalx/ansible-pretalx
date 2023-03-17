@@ -30,7 +30,7 @@
     state: latest  # noqa package-latest
   become: true
   become_user: "{{ pretalx_system_user }}"
-  when: pretalx_redis is defined
+  when: pretalx_redis or pretalx_celery
   tags:
     - pretalx
     - pretalx-install
@@ -219,6 +219,7 @@
   notify:
     - Reload systemd services
     - Restart worker service
+  when: pretalx_celery
   tags:
     - pretalx
 

@@ -16,8 +16,24 @@
       - gcc
       - gettext
       - git
-      - redis-server
+    state: present
+  tags:
+    - pretalx
+
+- name: Install sqlite
+  apt:
+    name:
       - sqlite3
     state: present
+  when: pretalx_database_backend != 'postgresql' and pretalx_database_backend != 'mysql'
+  tags:
+    - pretalx
+
+- name: Install redis
+  apt:
+    name:
+      - redis-server
+    state: present
+  when: pretalx_redis
   tags:
     - pretalx
