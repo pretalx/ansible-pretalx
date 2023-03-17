@@ -244,6 +244,7 @@
     name: pretalx-worker@{{ pretalx_instance_identifier }}
     state: started
     enabled: true
+  when: pretalx_celery
   tags:
     - pretalx
 
