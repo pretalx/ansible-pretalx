@@ -34,7 +34,7 @@ pretalx_service_workers_max_requests_jitter: 50  # https://docs.gunicorn.org/en/
 pretalx_nginx: false
 pretalx_nginx_path: false
 pretalx_nginx_force_https: false  # Set to true if you want this role to take care of HTTPS upgrades, leave false if your nginx configuration handles this already
-pretalx_nginx_cert_root: /etc/ssl/letsencrypt/certs
+pretalx_cert_root: /etc/ssl/letsencrypt/certs  # for Nginx configuration
 pretalx_nginx_http_only: false
 
 pretalx_redis: false
