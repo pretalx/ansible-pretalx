@@ -45,7 +45,7 @@ pretalx_celery_broker: "redis://127.0.0.1:6379/2"
 
 pretalx_version: latest
 pretalx_git_version: ""
-pretalx_git_url: "git://github.com/pretalx/pretalx.git"
+pretalx_git_url: "https://github.com/pretalx/pretalx.git"
 
 pretalx_plugins: null
 
