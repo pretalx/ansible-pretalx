@@ -4,6 +4,7 @@
     name:
       - python
       - git
+      - npm
     state: present
   notify:
     - Reload systemd services
