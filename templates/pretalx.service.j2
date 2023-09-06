@@ -6,7 +6,6 @@ After=network.target
 [Service]
 User={{ pretalx_system_user_prefix }}%i
 Group={{ pretalx_system_user_prefix }}%i
-WorkingDirectory=/home/{{ pretalx_system_user_prefix }}%i/.local/lib/python{{ pretalx_system_python_version }}/site-packages/pretalx
-ExecStart=/home/{{ pretalx_system_user_prefix }}%i/.local/bin/gunicorn --bind unix:/run/gunicorn/pretalx_%i --workers {{ pretalx_service_workers }}  --max-requests {{ pretalx_service_workers_max_requests }}  --max-requests-jitter {{ pretalx_service_workers_max_requests_jitter }} pretalx.wsgi
+ExecStart={{ pretalx_virtualenv }}/bin/gunicorn --bind unix:/run/gunicorn/pretalx_%i --workers {{ pretalx_service_workers }}  --max-requests {{ pretalx_service_workers_max_requests }}  --max-requests-jitter {{ pretalx_service_workers_max_requests_jitter }} pretalx.wsgi
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
