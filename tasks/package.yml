@@ -27,7 +27,7 @@
   pip:
     name: django_redis
     state: latest  # noqa package-latest
-    virtualenv: "{{ pretalx_virtualenv | default(omit) }}"
+    virtualenv: "{{ pretalx_virtualenv }}"
   become: true
   become_user: "{{ pretalx_system_user }}"
   when: pretalx_redis or pretalx_celery
@@ -39,7 +39,7 @@
   pip:
     name: gunicorn
     state: latest  # noqa package-latest
-    virtualenv: "{{ pretalx_virtualenv | default(omit) }}"
+    virtualenv: "{{ pretalx_virtualenv }}"
   become: true
   become_user: "{{ pretalx_system_user }}"
   tags:
