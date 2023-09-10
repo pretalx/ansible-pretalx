@@ -99,6 +99,7 @@
     - Restart worker service
     - Run pretalx migrations
     - Collect static pretalx files
+    - Compile pretalx javascript
     - Compress static pretalx files
     - Compile pretalx messages
     - Compile pretalx styles
@@ -118,6 +119,7 @@
     - Restart pretalx service
     - Restart worker service
     - Run pretalx migrations
+    - Compile pretalx javascript
     - Collect static pretalx files
     - Compress static pretalx files
     - Compile pretalx messages
@@ -139,6 +141,7 @@
     - Restart worker service
     - Run pretalx migrations
     - Collect static pretalx files
+    - Compile pretalx javascript
     - Compress static pretalx files
     - Compile pretalx messages
     - Compile pretalx styles
@@ -177,6 +180,7 @@
     - Run pretalx migrations
     - Collect static pretalx files
     - Compress static pretalx files
+    - Compile pretalx javascript
     - Compile pretalx messages
     - Compile pretalx styles
     - Install pretalx plugins

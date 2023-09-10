@@ -30,6 +30,11 @@
   become: true
   become_user: "{{ pretalx_system_user }}"
 
+- name: Compile pretalx javascript
+  command: "{{ pretalx_python }} -m pretalx rebuild --npm-install"
+  become: true
+  become_user: "{{ pretalx_system_user }}"
+
 - name: Collect static pretalx files
   command: "{{ pretalx_python }} -m pretalx collectstatic --noinput"
   become: true
@@ -66,3 +71,5 @@
   service:
     name: pretalx@{{ pretalx_instance_identifier }}.socket
     state: restarted
+
+
