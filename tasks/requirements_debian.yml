@@ -16,6 +16,7 @@
       - gcc
       - gettext
       - git
+      - npm
     state: present
   tags:
     - pretalx
