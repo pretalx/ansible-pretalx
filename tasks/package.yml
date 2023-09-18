@@ -56,9 +56,7 @@
     - Restart pretalx service
     - Restart worker service
     - Run pretalx migrations
-    - Collect static pretalx files
-    - Compress static pretalx files
-    - Compile pretalx messages
+    - Rebuild pretalx files
     - Compile pretalx styles
   become: true
   become_user: "{{ pretalx_system_user }}"
@@ -100,9 +98,7 @@
     - Restart pretalx service
     - Restart worker service
     - Run pretalx migrations
-    - Collect static pretalx files
-    - Compress static pretalx files
-    - Compile pretalx messages
+    - Rebuild pretalx files
     - Compile pretalx styles
   when: (pretalx_version == 'latest') and not (pretalx_git_version)
   become: true
@@ -121,9 +117,7 @@
     - Restart pretalx service
     - Restart worker service
     - Run pretalx migrations
-    - Collect static pretalx files
-    - Compress static pretalx files
-    - Compile pretalx messages
+    - Rebuild pretalx files
     - Compile pretalx styles
   when: (pretalx_version != 'latest') and not pretalx_git_version
   become: true
@@ -142,9 +136,7 @@
     - Restart pretalx service
     - Restart worker service
     - Run pretalx migrations
-    - Collect static pretalx files
-    - Compress static pretalx files
-    - Compile pretalx messages
+    - Rebuild pretalx files
     - Compile pretalx styles
   when: pretalx_git_version | length > 0
   become: true
@@ -179,9 +171,7 @@
     - Restart pretalx service
     - Restart worker service
     - Run pretalx migrations
-    - Collect static pretalx files
-    - Compress static pretalx files
-    - Compile pretalx messages
+    - Rebuild pretalx files
     - Compile pretalx styles
     - Install pretalx plugins
   tags:

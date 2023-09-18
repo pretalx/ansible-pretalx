@@ -9,19 +9,8 @@
   become: true
   become_user: "{{ pretalx_system_user }}"
 
-- name: Compile messages for plugins
-  shell: cd {{ pretalx_system_home }}/plugins/{{ item.name }} && make
-  with_items: "{{ pretalx_plugins }}"
-  become: true
-  become_user: "{{ pretalx_system_user }}"
-
 - name: Run pretalx migrations
   command: python{{ pretalx_system_python_version }} -m pretalx migrate
-  become: true
-  become_user: "{{ pretalx_system_user }}"
-
-- name: Compile pretalx messages
-  command: python{{ pretalx_system_python_version }} -m pretalx compilemessages
   become: true
   become_user: "{{ pretalx_system_user }}"
 
@@ -30,13 +19,14 @@
   become: true
   become_user: "{{ pretalx_system_user }}"
 
-- name: Collect static pretalx files
-  command: python{{ pretalx_system_python_version }} -m pretalx collectstatic --noinput
+- name: Compile messages for plugins
+  shell: cd {{ pretalx_system_home }}/plugins/{{ item.name }} && make
+  with_items: "{{ pretalx_plugins }}"
   become: true
   become_user: "{{ pretalx_system_user }}"
 
-- name: Compress static pretalx files
-  command: python{{ pretalx_system_python_version }} -m pretalx compress
+- name: Rebuild pretalx files
+  command: python{{ pretalx_system_python_version }} -m pretalx rebuild --npm-install
   become: true
   become_user: "{{ pretalx_system_user }}"
 
