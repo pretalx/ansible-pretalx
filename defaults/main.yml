@@ -22,8 +22,7 @@ pretalx_admin_mail: ""
 pretalx_mail_from: admin@localhost
 pretalx_mail_host: localhost
 pretalx_mail_port: 25
-pretalx_mail_user: admin
-pretalx_mail_password: password
+
 pretalx_mail_tls: "False"
 pretalx_mail_ssl: "True"
 
