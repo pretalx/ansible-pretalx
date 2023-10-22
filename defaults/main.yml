@@ -25,6 +25,8 @@ pretalx_mail_port: 25
 
 pretalx_mail_tls: "False"
 pretalx_mail_ssl: "True"
+pretalx_mail_user: None # if set to None do not use authentication
+pretalx_mail_password: None
 
 pretalx_service_workers: 4  # https://docs.gunicorn.org/en/stable/settings.html?highlight=max-requests#workers
 pretalx_service_workers_max_requests: 1200  # https://docs.gunicorn.org/en/stable/settings.html?highlight=max-requests#max-requests
