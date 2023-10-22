@@ -126,7 +126,7 @@
 - name: Install pretalx (git)
   pip:
     name: "git+{{ pretalx_git_url }}@{{ pretalx_git_version }}#egg=pretalx{{ pretalx_extra }}"
-    state: latest  # noqa package-latest
+    state: forcereinstall
     virtualenv: "{{ pretalx_virtualenv }}"
   notify:
     - Restart pretalx service
