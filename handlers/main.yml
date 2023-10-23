@@ -4,20 +4,20 @@
     daemon_reload: true
 
 - name: Install pretalx plugins
-  shell: cd {{ pretalx_system_home }}/plugins/{{ item.name }} && python{{ pretalx_system_python_version }} setup.py develop --user
+  shell: cd {{ pretalx_system_home }}/plugins/{{ item.name }} && {{ pretalx_python }} setup.py develop --user
   with_items: "{{ pretalx_plugins }}"
   become: true
   become_user: "{{ pretalx_system_user }}"
   changed_when: true
 
 - name: Run pretalx migrations
-  command: python{{ pretalx_system_python_version }} -m pretalx migrate
+  command: "{{ pretalx_python }} -m pretalx migrate"
   become: true
   become_user: "{{ pretalx_system_user }}"
   changed_when: true
 
 - name: Compile pretalx styles
-  command: python{{ pretalx_system_python_version }} -m pretalx regenerate_css
+  command: "{{ pretalx_python }} -m pretalx regenerate_css"
   become: true
   become_user: "{{ pretalx_system_user }}"
   changed_when: true
@@ -30,7 +30,7 @@
   changed_when: true
 
 - name: Rebuild pretalx files
-  command: python{{ pretalx_system_python_version }} -m pretalx rebuild --npm-install
+  command: "{{ pretalx_python }} -m pretalx rebuild --npm-install"
   become: true
   become_user: "{{ pretalx_system_user }}"
   changed_when: true

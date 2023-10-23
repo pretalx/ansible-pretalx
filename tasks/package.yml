@@ -19,15 +19,15 @@
     - "{{ pretalx_staticfiles_directory }}"
     - "{{ pretalx_data_dir }}"
     - "{{ pretalx_media_dir }}"
+    - "{{ pretalx_virtualenv }}"
   tags:
     - pretalx
 
 - name: Install redis client
   pip:
     name: django_redis
-    executable: pip3
-    extra_args: --user
     state: latest  # noqa package-latest
+    virtualenv: "{{ pretalx_virtualenv }}"
   become: true
   become_user: "{{ pretalx_system_user }}"
   when: pretalx_redis or pretalx_celery
@@ -38,9 +38,8 @@
 - name: Install gunicorn
   pip:
     name: gunicorn
-    executable: pip3
-    extra_args: --user
     state: latest  # noqa package-latest
+    virtualenv: "{{ pretalx_virtualenv }}"
   become: true
   become_user: "{{ pretalx_system_user }}"
   tags:
@@ -91,9 +90,8 @@
 - name: Install pretalx (latest)
   pip:
     name: "pretalx{{ pretalx_extra }}"
-    executable: pip3
-    extra_args: --user
     state: latest  # noqa package-latest
+    virtualenv: "{{ pretalx_virtualenv }}"
   notify:
     - Restart pretalx service
     - Restart worker service
@@ -110,9 +108,8 @@
 - name: Install pretalx (versioned)
   pip:
     name: "pretalx{{ pretalx_extra }}"
-    executable: pip3
-    extra_args: --user
-    version: "{{ pretalx_version }}"
+    version: "{{ pretalx_version }}"  # noqa package-lastest
+    virtualenv: "{{ pretalx_virtualenv }}"
   notify:
     - Restart pretalx service
     - Restart worker service
@@ -129,9 +126,8 @@
 - name: Install pretalx (git)
   pip:
     name: "git+{{ pretalx_git_url }}@{{ pretalx_git_version }}#egg=pretalx{{ pretalx_extra }}"
-    executable: pip3
-    extra_args: --user
-    state: latest  # noqa package-latest
+    state: forcereinstall
+    virtualenv: "{{ pretalx_virtualenv }}"
   notify:
     - Restart pretalx service
     - Restart worker service
@@ -256,7 +252,7 @@
     minute: "40"
     name: Run pretalx{{ pretalx_instance_identifier }} periodic task
     user: "{{ pretalx_system_user }}"
-    job: "python{{ pretalx_system_python_version }} -m pretalx runperiodic"
+    job: "{{ pretalx_python }} -m pretalx runperiodic"
   when: pretalx_cron
   tags:
     - pretalx
