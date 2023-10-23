@@ -1,5 +1,7 @@
 ---
-pretalx_instance_identifier: "event"  # used if you have more than one instance on your server
+# Use if you have more than one instance on your server, for example for
+# seamless updates (sharing a database) or separate instances.
+pretalx_instance_identifier: "main"
 
 pretalx_system_user_prefix: "pretalx_"
 
