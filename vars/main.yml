@@ -1,3 +1,0 @@
----
-pretalx_system_user: "{{ pretalx_system_user_prefix }}{{ pretalx_instance_identifier }}"
-pretalx_system_home: "/home/{{ pretalx_system_user }}"

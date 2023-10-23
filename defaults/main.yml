@@ -3,8 +3,8 @@
 # seamless updates (sharing a database) or separate instances.
 pretalx_instance_identifier: "main"
 
-pretalx_system_user_prefix: "pretalx_"
-
+pretalx_system_user: "pretalx"
+pretalx_system_home: "/home/{{ pretalx_system_user }}"
 pretalx_database_backend: postgresql
 pretalx_database_name: pretalx{{ pretalx_instance_identifier }}
 pretalx_database_user: pretalx{{ pretalx_instance_identifier }}

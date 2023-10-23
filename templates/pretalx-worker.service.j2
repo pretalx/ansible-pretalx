@@ -3,8 +3,8 @@ Description=pretalx %I background worker
 After=network.target
 
 [Service]
-User={{ pretalx_system_user_prefix }}%i
-Group={{ pretalx_system_user_prefix }}%i
+User={{ pretalx_system_user }}
+Group={{ pretalx_system_user }}
 ExecStart={{ pretalx_virtualenv }}/bin/celery -A pretalx.celery_app worker -l info
 WorkingDirectory={{ pretalx_virtualenv }}/lib/python{{ pretalx_system_python_version }}/site-packages/pretalx
 Restart=on-failure
