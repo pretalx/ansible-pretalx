@@ -91,7 +91,7 @@
   pip:
     name: "pretalx{{ pretalx_extra }}"
     state: latest  # noqa package-latest
-    virtualenv: "{{ pretalx_virtualenv  }}"
+    virtualenv: "{{ pretalx_virtualenv }}"
   notify:
     - Restart pretalx service
     - Restart worker service
