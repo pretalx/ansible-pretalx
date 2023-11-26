@@ -50,7 +50,7 @@
   template:
     src: pretalx.cfg.j2
     dest: "{{ pretalx_system_home }}/.pretalx.cfg"
-    mode: "0644"
+    mode: "0600"
   notify:
     - Restart pretalx service
     - Restart worker service
