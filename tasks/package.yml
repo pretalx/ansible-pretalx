@@ -1,12 +1,4 @@
 ---
-- name: Create a pretalx user
-  user:
-    name: "{{ pretalx_system_user }}"
-    state: present
-    system: true
-  tags:
-    - pretalx
-
 - name: Create required directories
   file:
     path: "{{ item }}"

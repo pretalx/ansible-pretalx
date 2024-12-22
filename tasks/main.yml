@@ -2,6 +2,14 @@
 - name: Install system requirements
   import_tasks: requirements.yml
 
+- name: Create a pretalx user
+  user:
+    name: "{{ pretalx_system_user }}"
+    state: present
+    system: true
+  tags:
+    - pretalx
+
 - name: Detect installed system Python version
   command: |
     python3 -c "import sys; (major, minor) = sys.version_info[0:2]; print(f'{major}.{minor}')"
