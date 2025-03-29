@@ -59,3 +59,5 @@ pretalx_cron: true
 pretalx_alternate_domains: null  # can be a string like "location1 location2"
 
 pretalx_additional_config: null  # string that will be appended to the cfg file without further modifications
+
+pretalx_handler_regenerate_css: false
