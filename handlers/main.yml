@@ -21,6 +21,7 @@
   become: true
   become_user: "{{ pretalx_system_user }}"
   changed_when: true
+  when: pretalx_handler_regenerate_css
 
 - name: Compile messages for plugins
   shell: cd {{ pretalx_system_home }}/plugins/{{ item.name }} && make
