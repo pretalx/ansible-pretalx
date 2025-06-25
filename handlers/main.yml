@@ -4,7 +4,7 @@
     daemon_reload: true
 
 - name: Install pretalx plugins
-  shell: cd {{ pretalx_system_home }}/plugins/{{ item.name }} && {{ pretalx_python }} setup.py develop --user
+  shell: cd {{ pretalx_system_home }}/plugins/{{ item.name }} && {{ pretalx_python }} -m pip install -e .
   with_items: "{{ pretalx_plugins }}"
   become: true
   become_user: "{{ pretalx_system_user }}"
