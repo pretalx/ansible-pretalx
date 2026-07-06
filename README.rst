@@ -1,8 +1,7 @@
 ansible-pretalx
 ===============
 
-.. image:: https://github.com/pretalx/ansible-pretalx/actions/workflows/lint.yml/badge.svg
-   :target: https://github.com/pretalx/ansible-pretalx/actions/workflows/lint.yml
+**This role has been archived and is no longer supported.**
 
 `ansible-pretalx` is an ansible role to install pretalx_ in a production environment.
 
